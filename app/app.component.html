@@ -1,0 +1,30 @@
+
+<h1 class="jumbotron"> <span class="glyphicon glyphicon-piggy-bank"></span>>Cinema World</h1>
+
+<div class="text-lg-center">
+  <button class="btn btn-primary btn-lg" routerLink="/home" routerLinkActive="active"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Home</button>
+  <button class="btn btn-primary btn-lg" routerLink="/cheapest-movies" routerLinkActive="active"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Cheapest</button>
+
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+
+<h1>Cinema World</h1>
+<div>
+  <h1>Selecated Movie</h1>
+  {{movie.Title}}
+</div>
+<div>
+
+  <div *ngFor="let m of movies; let i = index">
+    <div>{{i}} {{m.Title}}</div>
+    <div>{{m.Year}}</div>
+    <img src="{{m.Poster}}">
+  </div>
+
+
+
+</div>
