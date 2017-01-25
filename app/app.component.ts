@@ -2,7 +2,6 @@ import {Component, OnInit, transition} from '@angular/core';
 import {MovieService} from "./movie.service";
 import {Movie, MovieDetails} from "./Movie";
 import {HttpClient} from "./http-client.service";
-import {Http, Jsonp} from "@angular/http";
 
 @Component({
     moduleId: module.id,
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit{
     })
 
 
-    this.movieService.GetMovie("cw0086190").then((movie) => {
+    this.movieService.GetMovieDetails("cw0086190").then((movie) => {
       this.movie = movie;
 
     })

@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {Movie, MovieDetails} from "./Movie";
 import {MovieService} from "./movie.service";
+
+
 /**
  * Created by jaype on 1/24/2017.
  */
@@ -10,7 +12,7 @@ import {MovieService} from "./movie.service";
   moduleId: module.id,
   selector: 'cheapest-movies',
   templateUrl: 'cheapest-movies.component.html',
-  styleUrls:['cheapest-movies.component.css']
+  styleUrls:['cheapest-movies.component.css'],
 
 })
 export class CheapestMoviesComponent
@@ -21,16 +23,27 @@ export class CheapestMoviesComponent
     this.moviesWithDetails = [];
   }
 
+
+
+
   ngOnInit(){
-    // let arrayString:string[] = ['cw0086190','cw0086190'];
-    // this.movieService.GetMovieDetails(arrayString).then((movies:MovieDetails[]) => {
+    //    this.movieService.GetMoviesDetails().then(movies => {
     //   this.moviesWithDetails = movies;
-    // })
+    // }).catch(error=>{
+    //   alert(error);
+    //    });
 
-
-    this.movieService.GetMoviesWithFullDetails().then(movies => {
-      this.moviesWithDetails = movies;
-    })
+    this.moviesWithDetails = [];
+    this.movieService.GetMovies2().subscribe(movies=>{
+      if(movies)
+      {
+        movies.forEach(movie=>{
+          this.movieService.GetMovieDetails2(movie.ID).subscribe(d=>{
+            this.moviesWithDetails.push(d);
+          }, error=>{ alert(error + " Title:" + movie.Title);});
+        })
+      }
+    },error=>{ alert(error);})
 
   }
 

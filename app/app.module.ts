@@ -17,7 +17,7 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
   declarations: [ AppComponent,
     HomeComponent,
     MovieDetailsComponent,
-    CheapestMoviesComponent ],
+    CheapestMoviesComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
