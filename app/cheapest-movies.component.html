@@ -1,1 +1,8 @@
 <h1>Cheapest Movies!</h1>
+<div *ngFor="let m of moviesWithDetails; let i = index">
+  <div>{{i}} {{m.Title}}</div>
+  <div>{{m.Year}}</div>
+  <div>{{m.Plot}}</div>
+  <div>{{m.Price}}</div>
+  <img src="{{m.Poster}}">
+</div>

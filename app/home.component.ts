@@ -1,8 +1,6 @@
-import {Component} from "@angular/core";
-/**
- * Created by jaype on 1/24/2017.
- */
-
+import {Component, OnInit} from "@angular/core";
+import {MovieService} from "./movie.service";
+import {Movie} from "./Movie";
 
 @Component({
   moduleId: module.id,
@@ -11,6 +9,17 @@ import {Component} from "@angular/core";
   styleUrls: ['home.component.css']
 
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit{
+  movies: Movie[];
 
+  constructor(private movieService: MovieService){
+    this.movies = [];
+  }
+
+  ngOnInit(){
+    this.movieService.GetMovies().then((movies) => {
+      this.movies = movies;
+    })
+
+  }
 }

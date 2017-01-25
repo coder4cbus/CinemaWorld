@@ -1,3 +1,9 @@
 
 
 <h1>Home Component</h1>
+
+<div *ngFor="let m of movies; let i = index">
+  <div>{{i}} {{m.Title}}</div>
+  <div>{{m.Year}}</div>
+  <img src="{{m.Poster}}">
+</div>

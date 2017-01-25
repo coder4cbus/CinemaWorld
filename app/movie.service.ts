@@ -18,6 +18,78 @@ export class MovieService {
     }).catch(this.handleError);
   }
 
+
+  GetMovieDetails(movies: Movie[]): Promise<MovieDetails[]>
+  {
+    var promises:Promise<MovieDetails>[] = [];
+    movies.forEach(movie=>{
+      promises.push(this.GetMovie(movie.ID));
+    })
+
+    // return Promise.all(promises).then(results=>{
+    //   return results;
+    // });
+    return Promise.all(promises);
+  }
+
+  GetMoviesWithFullDetails():Promise<MovieDetails[]>
+  {
+    return this.GetMovies().then(movies=>{
+
+      //put all of the get movie promises to an array list
+      var promises:Promise<MovieDetails>[] = [];
+      movies.forEach(movie=>{
+        promises.push(this.GetMovie(movie.ID));
+      })
+
+      //resolve the get movie promises
+      return Promise.all(promises);
+
+    }).catch(this.handleError);
+  }
+
+  // GetMoviesWithFullDetails(): Promise<MovieDetails[]> {
+  //   let movieDetails:MovieDetails[] = [];
+  //   this.GetMovies().then((response)=>{
+  //   return Promise.all([response,  ])
+  //   })
+  //
+  //   // this.GetMovies().then((response)=>{
+  //   //
+  //   //   response.forEach(function(movie) {
+  //   //     this.GetMovie(movie.ID).then((response:MovieDetails) => {
+  //   //
+  //   //     });
+  //   //   });
+  //   //
+  //   //
+  //   //
+  //   // })
+  //
+  // }
+
+
+  // GetMoviesWithFullDetails2(): Promise<MovieDetails[]> {
+  //  let movieDetails:MovieDetails[] = [];
+  //  this.GetMovies().then((response)=>{
+  //
+  //    response.forEach(function(movie) {
+  //
+  //
+  //
+  //
+  //      this.GetMovie(movie.ID).then((response:MovieDetails) => {
+  //
+  //        }
+  //      );
+  //
+  //
+  //
+  //    });
+  //    return Promise.resolve(movieDetails);
+  //  })
+  // }
+
   GetMovie(id: string): Promise<MovieDetails> {
     return this.httpClient.get(urlPrefix + '/api/cinemaworld/movie/' + id).toPromise().then(response => {
       return response.json() as MovieDetails;
