@@ -24,32 +24,21 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.movieService.GetMovies().then((movies) => {
-      this.movies = movies;
-      // let movie1 = new Movie();
-      // movie1.Title = "LOL";
-      //
-      // let movie2 = new Movie();
-      // movie2.Title = "LOL2";
-      //
-      //
-      // this.movies = [];
-      // this.movies.push(movie1);
-      // this.movies.push(movie2);
-
-    })
-
-
-    this.movieService.GetMovieDetails("cw0086190").then((movie) => {
-      this.movie = movie;
-
-    })
-
-
-
-    // this.transactionService.getTransactions().then((transactions) => {
-    //   this.transactions = transactions
+    // this.movieService.GetMovies2().subscribe((movies) => {
+    //   this.movies = movies;
+    //
+    //
     // })
+    //
+    //
+    // this.movieService.GetMovieDetails("cw0086190").then((movie) => {
+    //   this.movie = movie;
+    //
+    // })
+
+
+
+
   }
 
 }

@@ -24,15 +24,7 @@ export class CheapestMoviesComponent
   }
 
 
-
-
   ngOnInit(){
-    //    this.movieService.GetMoviesDetails().then(movies => {
-    //   this.moviesWithDetails = movies;
-    // }).catch(error=>{
-    //   alert(error);
-    //    });
-
     this.moviesWithDetails = [];
     this.movieService.GetMovies2().subscribe(movies=>{
       if(movies)
@@ -40,11 +32,21 @@ export class CheapestMoviesComponent
         movies.forEach(movie=>{
           this.movieService.GetMovieDetails2(movie.ID).subscribe(d=>{
             this.moviesWithDetails.push(d);
+
+            this.moviesWithDetails.sort((a:MovieDetails, b: MovieDetails)=>{
+              if (+a.Price < +b.Price)
+                return -1;
+              if (+a.Price > +b.Price)
+                return 1;
+              return 0;
+            })
           }, error=>{ alert(error + " Title:" + movie.Title);});
         })
       }
     },error=>{ alert(error);})
 
   }
+
+
 
 }

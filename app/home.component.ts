@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.movieService.GetMovies().then((movies) => {
+    this.movieService.GetMovies2().subscribe((movies) => {
       this.movies = movies;
     })
 

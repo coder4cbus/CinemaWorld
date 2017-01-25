@@ -9,7 +9,6 @@ import 'rxjs/Rx';
 export class HttpClient {
     constructor(private http: Http) { }
 
-
     get(url: string) {
         let headers = new Headers();
         headers.append('x-access-token', constants.token);

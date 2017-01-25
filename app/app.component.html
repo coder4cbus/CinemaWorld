@@ -1,13 +1,28 @@
 
-<h1 class="jumbotron"> <span class="glyphicon glyphicon-piggy-bank"></span>Cinema World</h1>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- As a heading -->
+  <nav class="navbar navbar-light bg-faded">
+    <h1 class="navbar-brand mb-0">Cinema World</h1>
+  </nav>
 
-<div class="text-lg-center">
-  <button class="btn btn-primary btn-lg" routerLink="/home" routerLinkActive="active"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Home</button>
-  <button class="btn btn-primary btn-lg" routerLink="/cheapest-movies" routerLinkActive="active"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Cheapest</button>
-  <button class="btn btn-primary btn-lg" routerLink="/movie-details/cw0086190" routerLinkActive="active"><span class="glyphicon glyphicon-transfer"></span>&nbsp;Details</button>
-</div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cheapest-movies">Cheapest</a>
+      </li>
 
-<div>
+    </ul>
+  </div>
+</nav>
+
+
+<div id="body">
   <router-outlet></router-outlet>
 </div>
 

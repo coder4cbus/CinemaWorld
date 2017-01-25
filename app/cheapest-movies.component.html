@@ -1,8 +1,22 @@
 <h1>Cheapest Movies!</h1>
-<div *ngFor="let m of moviesWithDetails; let i = index">
-  <div>{{i}} {{m.Title}}</div>
-  <div>{{m.Year}}</div>
-  <div>{{m.Plot}}</div>
-  <div>{{m.Price}}</div>
-  <img src="{{m.Poster}}">
+
+<div class="row">
+    <div *ngFor="let m of moviesWithDetails; let i = index" class="col-sm-12 col-md-4 col-lg-2 ">
+    <div class="card">
+      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap">
+      <div class="card-block">
+        <h5 class="card-title">{{m.Title}}</h5>
+        <p class="card-text">{{m.Price}}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!--<div *ngFor="let m of moviesWithDetails; let i = index">-->
+  <!--<div>{{i}} {{m.Title}}</div>-->
+  <!--<div>{{m.Year}}</div>-->
+  <!--<div>{{m.Plot}}</div>-->
+  <!--<div>{{m.Price}}</div>-->
+  <!--<img src="{{m.Poster}}">-->
+<!--</div>-->

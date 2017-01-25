@@ -22,7 +22,7 @@ export class MovieDetailsComponent implements OnInit
   ngOnInit(){
     this.route.params.forEach((params: Params) => {
       this.id = params['id'];
-      this.movieService.GetMovieDetails(this.id).then((response) => {
+      this.movieService.GetMovieDetails2(this.id).subscribe((response) => {
           this.movie = response;
         }
       );
