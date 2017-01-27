@@ -1,6 +1,6 @@
 
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MovieService} from "./movie.service";
 import {MovieDetails} from "./Movie";
 @Component({
@@ -13,6 +13,8 @@ export class MovieDetailsComponent implements OnInit
 {
   id: string;
   m: MovieDetails;
+  router:Router;
+
   checkIfHaveNullProperties(): boolean
   {
     for (var property in MovieDetails) {
@@ -29,7 +31,7 @@ export class MovieDetailsComponent implements OnInit
 
 
   constructor(private route: ActivatedRoute,
-    private movieService: MovieService){
+    private movieService: MovieService, router: Router){
     this.m = new MovieDetails();
   }
 

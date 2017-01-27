@@ -3,4 +3,26 @@ img {
   height:189px;
 }
 
+nav a
+{
+  background-color: inherit;
+  text-align: center;
+}
 
+nav a:hover
+{
+  background-color: gainsboro;
+}
+
+.navbar-brand
+{
+  font-size: 50px;
+  color:gray;
+}
+
+#cinema-text
+{
+  font-size: 50px;
+  color: #bd4147;
+  font-family: 'Montserrat', sans-serif;
+}

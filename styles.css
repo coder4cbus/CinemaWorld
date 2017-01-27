@@ -4,10 +4,13 @@ h1 {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
-h2, h3 {
+h2, h3, h4 {
   color: #444;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  font-weight: lighter;
+  font-weight: 100 !important;
+  margin-left: 60px !important;
+  margin-top: 20px !important;
+  margin-bottom: 0px !important;
 }
 body {
   margin: 2em;
@@ -145,4 +148,14 @@ nav a.router-link-active {
 .row
 {
   padding: 10px;
+}
+
+.movie-box
+{
+  box-shadow: 0px 0px 10px #888888;
+  background-color: white;
+}
+.movies-container
+{
+  justify-content: center;
 }

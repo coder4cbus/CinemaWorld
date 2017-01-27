@@ -1,9 +1,10 @@
-<h3>Cheapest Movies</h3>
+<h2>Cheapest Movies</h2>
 
-<div class="row justify-content-lg-center">
+<div class="row justify-content-lg-center movies-container">
     <div *ngFor="let m of moviesWithDetails; let i = index">
-    <div class="card">
-      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" onclick="GoToDetails(m.ID)">
+    <div class="card movie-box">
+
+      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="GoToDetails(m.ID)">
       <div class="card-block">
         <a class="card-title" href="#/movie-details/{{m.ID}}">{{m.Title}}</a>
         <div>
@@ -11,9 +12,11 @@
         <span *ngFor="let star of +m.Rating | fill">★</span>
         <span *ngFor="let star of 10 - +m.Rating | fill">☆</span>
       </div>
-        <p class="card-text">$ {{m.Price}}</p>
+        <a id="price-text" class="card-text">$ {{m.Price}} Buy</a>
 
-        <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+        <div *ngIf="i==0" id="cheapest-triangle"></div>
+        <div *ngIf="i==0" id="cheapest-text">CHEAPEST</div>
+
       </div>
     </div>
   </div>

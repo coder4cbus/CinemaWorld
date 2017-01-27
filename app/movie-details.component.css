@@ -1,16 +1,25 @@
 img {
-  width:300px;
-  height:458px;
+  /*width:300px;*/
+  /*height:458px;*/
+  width: 100%;
+  max-width: 300px;
+  min-width: 100px;
 }
 
 .btn-primary
 {
 
   float: right;
-  background-color: #a52714;
+  background-color: #bd4147;
   color:white;
-  width: 200px;
+  width: 150px;
   height: 50px;
+}
+.btn-primary:hover
+{
+  opacity: 0.90;
+  filter: alpha(opacity=90); /* For IE8 and earlier */
+  cursor: pointer;
 }
 
 .genre
@@ -34,21 +43,17 @@ font-weight: bold;
   font-size:larger;
 }
 
-.movie-box
-{
-  box-shadow: 0px 0px 10px #888888;
-  background-color: white;
-}
+
 
 #main-row, #main-col, #top-row
 {
   padding: 0px;
 }
 
-#main-row
-{
-  margin: 2em;
-}
+/*#main-row*/
+/*{*/
+  /*margin: 2em;*/
+/*}*/
 
 
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, transition} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MovieService} from "./movie.service";
 import {Movie, MovieDetails} from "./Movie";
 import {HttpClient} from "./http-client.service";
@@ -8,12 +8,13 @@ import {HttpClient} from "./http-client.service";
     selector: 'my-app',
     templateUrl: 'app.component.html',
     styleUrls:['app.component.css'],
-    providers:[MovieService, HttpClient]
+    providers:[MovieService, HttpClient],
 })
 export class AppComponent implements OnInit{
 
   movies: Movie[];
   movie: MovieDetails;
+
 
   constructor(private movieService: MovieService){
 

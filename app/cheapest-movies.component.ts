@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Movie, MovieDetails} from "./Movie";
+import {MovieDetails} from "./Movie";
 import {MovieService} from "./movie.service";
 import {Router} from "@angular/router";
 
@@ -13,17 +13,15 @@ import {Router} from "@angular/router";
   moduleId: module.id,
   selector: 'cheapest-movies',
   templateUrl: 'cheapest-movies.component.html',
-  styleUrls:['cheapest-movies.component.css'],
-
-
+  styleUrls:['cheapest-movies.component.css']
 })
 export class CheapestMoviesComponent
 {
   moviesWithDetails: MovieDetails[];
   router: Router;
 
-  constructor(private movieService: MovieService,
-              private router: Router){
+  constructor(private movieService: MovieService, router: Router){
+    this.router = router
     this.moviesWithDetails = [];
   }
 
@@ -53,7 +51,7 @@ export class CheapestMoviesComponent
 
   GoToDetails(id:string):void
   {
-    this.router.navigate(['#/movie-details/', id]);
+     this.router.navigate(['/movie-details', id]);
   }
 
 
