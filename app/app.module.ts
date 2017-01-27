@@ -8,12 +8,14 @@ import {MovieDetailsComponent} from "./movie-details.component";
 import {CheapestMoviesComponent} from "./cheapest-movies.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {FillPipe} from "./fill.pipe";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [ BrowserModule,
     HttpModule,
     JsonpModule,
-    AppRoutingModule ],
+    AppRoutingModule,
+    NgbModule.forRoot(),],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }], //to prevent error when refreshed.
   declarations: [ AppComponent,
     HomeComponent,

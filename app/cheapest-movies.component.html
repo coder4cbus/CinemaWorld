@@ -1,6 +1,7 @@
 <h2>Cheapest Movies</h2>
 
 <div class="row justify-content-lg-center movies-container">
+    <ngb-alert [type]="'danger'" [dismissible]="true">Test message</ngb-alert>
     <div *ngFor="let m of moviesWithDetails; let i = index">
     <div class="card movie-box">
 
