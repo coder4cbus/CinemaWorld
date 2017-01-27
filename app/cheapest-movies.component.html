@@ -1,22 +1,22 @@
-<h1>Cheapest Movies!</h1>
+<h3>Cheapest Movies</h3>
 
-<div class="row">
-    <div *ngFor="let m of moviesWithDetails; let i = index" class="col-sm-12 col-md-4 col-lg-2 ">
+<div class="row justify-content-lg-center">
+    <div *ngFor="let m of moviesWithDetails; let i = index">
     <div class="card">
-      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap">
+      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" onclick="GoToDetails(m.ID)">
       <div class="card-block">
-        <h5 class="card-title">{{m.Title}}</h5>
-        <p class="card-text">{{m.Price}}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a class="card-title" href="#/movie-details/{{m.ID}}">{{m.Title}}</a>
+        <div>
+        <!--make a component for this later-->
+        <span *ngFor="let star of +m.Rating | fill">★</span>
+        <span *ngFor="let star of 10 - +m.Rating | fill">☆</span>
+      </div>
+        <p class="card-text">$ {{m.Price}}</p>
+
+        <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
       </div>
     </div>
   </div>
 </div>
 
-<!--<div *ngFor="let m of moviesWithDetails; let i = index">-->
-  <!--<div>{{i}} {{m.Title}}</div>-->
-  <!--<div>{{m.Year}}</div>-->
-  <!--<div>{{m.Plot}}</div>-->
-  <!--<div>{{m.Price}}</div>-->
-  <!--<img src="{{m.Poster}}">-->
-<!--</div>-->
+

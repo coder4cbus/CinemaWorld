@@ -1,6 +1,112 @@
-<div>Movie Detail</div>
-<!--<img src="{{movie.Poster}}"/>-->
-<div>{{movie.Title}}</div>
-<div>{{movie.Plot}}</div>
+<div id="main-row" *ngIf="m.Poster &&
+            m.Title &&
+            m.Year &&
+            m.Released &&
+            m.Runtime &&
+            m.Genre &&
+            m.Rating &&
+            m.Votes &&
+            m.Plot &&
+            m.Writer &&
+            m.Director &&
+            m.Actors &&
+            m.Rated &&
+            m.Language &&
+            m.Country &&
+            m.Metascore &&
+            m.Awards" class="row movie-box">
+  <div id="main-col"  class="col">
+    <div id="top-row" class="row">
+      <div class="col-lg-5">
+        <img src="{{m.Poster}}"/>
+      </div>
+      <div class="col-lg-7">
+        <div class="row">
+          <div class="col">
+            <h1>{{m.Title}}</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="year">{{m.Year}}</div>
+            <div>{{m.Released}}<span id="runtime">{{m.Runtime}}</span></div>
+            <div class="genre">{{m.Genre}}</div>
+          </div>
+          <div class="col">
+            <div *ngIf="m.Rating">
+              <!--make a component for this later-->
+              <span *ngFor="let star of +m.Rating | fill">★</span>
+              <span *ngFor="let star of 10 - +m.Rating | fill">☆</span>
+            </div>
+            <div *ngIf="m.Votes">{{m.Votes}} ☺</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn-primary">$ {{m.Price}}</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col">
+        {{m.Plot}}
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">CAST AND CREDITS</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="movie-property-names">Writer</div>
+            <div>{{m.Writer}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Director</div>
+            <div>{{m.Director}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Actors</div>
+            <div>{{m.Actors}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">ADDITIONAL INFORMATION</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="movie-property-names">Rating</div>
+            <div>{{m.Rated}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Language</div>
+            <div>{{m.Language}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Country</div>
+            <div>{{m.Country}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Metascore</div>
+            <div>{{m.Metascore}}</div>
+          </div>
+          <div class="col">
+            <div class="movie-property-names">Awards</div>
+            <div>{{m.Awards}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 

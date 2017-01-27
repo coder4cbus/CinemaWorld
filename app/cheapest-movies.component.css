@@ -1,4 +1,25 @@
-img {
-  width:137px;
-  height:189px;
+.card-img-top {
+  width:200px;
+  height:275px;
 }
+
+
+
+.card-img-top:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+  cursor: pointer;
+}
+.card
+{
+  width: 200px;
+  height:500px;
+  margin: 5px;
+}
+
+.card-title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a { color: inherit; }

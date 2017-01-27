@@ -12,18 +12,32 @@ import {MovieDetails} from "./Movie";
 export class MovieDetailsComponent implements OnInit
 {
   id: string;
-  movie: MovieDetails;
+  m: MovieDetails;
+  checkIfHaveNullProperties(): boolean
+  {
+    for (var property in MovieDetails) {
+      if (MovieDetails.hasOwnProperty(property)) {
+        if(!property)
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
+
 
   constructor(private route: ActivatedRoute,
     private movieService: MovieService){
-    this.movie = new MovieDetails();
+    this.m = new MovieDetails();
   }
 
   ngOnInit(){
     this.route.params.forEach((params: Params) => {
       this.id = params['id'];
       this.movieService.GetMovieDetails2(this.id).subscribe((response) => {
-          this.movie = response;
+          this.m = response;
         }
       );
     });

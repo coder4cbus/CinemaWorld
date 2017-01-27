@@ -7,6 +7,7 @@ import {HomeComponent} from "./home.component";
 import {MovieDetailsComponent} from "./movie-details.component";
 import {CheapestMoviesComponent} from "./cheapest-movies.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {FillPipe} from "./fill.pipe";
 
 @NgModule({
   imports: [ BrowserModule,
@@ -17,7 +18,8 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
   declarations: [ AppComponent,
     HomeComponent,
     MovieDetailsComponent,
-    CheapestMoviesComponent],
+    CheapestMoviesComponent,
+    FillPipe],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

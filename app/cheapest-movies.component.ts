@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {Movie, MovieDetails} from "./Movie";
 import {MovieService} from "./movie.service";
+import {Router} from "@angular/router";
 
 
 /**
@@ -14,12 +15,15 @@ import {MovieService} from "./movie.service";
   templateUrl: 'cheapest-movies.component.html',
   styleUrls:['cheapest-movies.component.css'],
 
+
 })
 export class CheapestMoviesComponent
 {
   moviesWithDetails: MovieDetails[];
+  router: Router;
 
-  constructor(private movieService: MovieService){
+  constructor(private movieService: MovieService,
+              private router: Router){
     this.moviesWithDetails = [];
   }
 
@@ -45,6 +49,11 @@ export class CheapestMoviesComponent
       }
     },error=>{ alert(error);})
 
+  }
+
+  GoToDetails(id:string):void
+  {
+    this.router.navigate(['#/movie-details/', id]);
   }
 
 
