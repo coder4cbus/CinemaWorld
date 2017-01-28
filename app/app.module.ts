@@ -7,8 +7,8 @@ import {HomeComponent} from "./Components/home.component";
 import {MovieDetailsComponent} from "./Components/movie-details.component";
 import {CheapestMoviesComponent} from "./Components/cheapest-movies.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
-import {StarMakerPipe} from "./Pipes/fill.pipe";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {StarMakerPipe} from "./Pipes/starMaker.pipe";
 
 @NgModule({
   imports: [ BrowserModule,
