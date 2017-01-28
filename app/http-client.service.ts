@@ -15,6 +15,7 @@ export class HttpClient {
 
         return this.http.get(url,  {
             headers: headers
-        }).retry(3);
+        });
+          //.retry(3);
     }
 }

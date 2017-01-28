@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {MovieService} from "./movie.service";
-import {Movie} from "./Movie";
+import {Movie} from "./Classes/Movie";
 
 @Component({
   moduleId: module.id,
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.movieService.GetMovies2().subscribe((movies) => {
+    this.movieService.GetMovies().subscribe((movies) => {
       this.movies = movies;
     })
 

@@ -1,11 +1,15 @@
 <h2>Cheapest Movies</h2>
 
+<div class="row">
+  <div class="col">
+    <ngb-alert *ngFor="let alert of alerts"  [type]="alert.type" [dismissible]="true" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>
+  </div>
+</div>
 <div class="row justify-content-lg-center movies-container">
-    <ngb-alert [type]="'danger'" [dismissible]="true">Test message</ngb-alert>
     <div *ngFor="let m of moviesWithDetails; let i = index">
     <div class="card movie-box">
 
-      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="GoToDetails(m.ID)">
+      <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="goToDetails(m.ID)">
       <div class="card-block">
         <a class="card-title" href="#/movie-details/{{m.ID}}">{{m.Title}}</a>
         <div>

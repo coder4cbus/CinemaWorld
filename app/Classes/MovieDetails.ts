@@ -1,24 +1,6 @@
-/**
- * Created by jaype on 1/22/2017.
- */
+import {Movie} from "./Movie";
 
-
-export class Movie{
-  Title: string;
-  Year: string;
-  ID: string;
-  Type: string;
-  Poster: string;
-}
-
-
-export class MovieDetails{
-  Title: string;
-  Year: string;
-  ID: string;
-  Type: string;
-  Poster: string;
-
+export class MovieDetails extends Movie{
   Rated: string;
   Released: string;
   Runtime: string;
@@ -34,8 +16,6 @@ export class MovieDetails{
   Rating: string;
   Votes: string;
   Price: string;
-}
-
-
-
-
+}/**
+ * Created by jaype on 1/28/2017.
+ */

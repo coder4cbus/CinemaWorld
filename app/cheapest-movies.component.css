@@ -53,3 +53,8 @@ a { color: inherit; }
   font-weight: bolder;
 }
 
+ngb-alert:hover
+{
+  cursor: pointer;
+}
+

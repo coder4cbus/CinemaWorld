@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Movie, MovieDetails} from "./Movie";
+import {Movie, MovieDetails} from "./Classes/Movie";
 import {HttpClient} from "./http-client.service";
 import 'rxjs/add/operator/toPromise';
 import {urlPrefix} from "./constants";
@@ -14,19 +14,19 @@ export class MovieService {
   constructor(private httpClient: HttpClient) {
   }
 
-  GetMovies2(): Observable<Movie[]>
+  GetMovies(): Observable<Movie[]>
   {
-    return this.httpClient.get(urlPrefix + '/api/cinemaworld/movies').map(o=>o.json().Movies as Movie[]).catch(this.handleError);
+    return this.httpClient.get(urlPrefix + '/movies').map(o=>o.json().Movies as Movie[]);
   }
 
   GetMovieDetails2(id: string): Observable<MovieDetails> {
-    return this.httpClient.get(urlPrefix + '/api/cinemaworld/movie/' + id).map(response => {
+    return this.httpClient.get(urlPrefix + '/movie/' + id).map(response => {
       return response.json() as MovieDetails;
-    }).catch(this.handleError);
+    })
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+  // private handleError(error: any): Promise<any> {
+  //   console.error('An error occurred', error); // for demo purposes only
+  //   return Promise.reject(error.message || error);
+  // }
 }

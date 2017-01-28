@@ -2,7 +2,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MovieService} from "./movie.service";
-import {MovieDetails} from "./Movie";
+import {MovieDetails} from "./Classes/MovieDetails";
 @Component({
   moduleId : module.id,
   selector: 'movie-details',
