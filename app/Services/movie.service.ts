@@ -17,7 +17,7 @@ export class MovieService {
     return this.httpClient.get(urlPrefix + '/movies').map(o=>o.json().Movies as Movie[]);
   }
 
-  GetMovieDetails2(id: string): Observable<MovieDetails> {
+  GetMovieDetails(id: string): Observable<MovieDetails> {
     return this.httpClient.get(urlPrefix + '/movie/' + id).map(response => {
       return response.json() as MovieDetails;
     })

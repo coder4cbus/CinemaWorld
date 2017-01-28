@@ -29,6 +29,11 @@ img {
 
 }
 
+#votes
+{
+  padding-top: 10px;
+}
+
 #runtime{
   padding-left: 20px;
 }
@@ -47,7 +52,8 @@ font-weight: bold;
 
 #main-row, #main-col, #top-row
 {
-  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /*#main-row*/

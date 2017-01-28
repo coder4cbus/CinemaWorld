@@ -15,10 +15,18 @@
   height: 450px;
   margin: 20px;
 }
+.card-title-div
+{
+  width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .card-title:hover, #price-text:hover {
   cursor: pointer;
   text-decoration: underline;
+
 }
 
 a { color: inherit; }

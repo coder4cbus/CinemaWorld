@@ -1,8 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MovieService} from "../Services/movie.service";
-import {Movie} from "../Classes/Movie";
 import {HttpClient} from "../Services/http-client.service";
-import {MovieDetails} from "../Classes/MovieDetails";
 
 @Component({
     moduleId: module.id,
@@ -11,36 +9,4 @@ import {MovieDetails} from "../Classes/MovieDetails";
     styleUrls:['app.component.css'],
     providers:[MovieService, HttpClient],
 })
-export class AppComponent implements OnInit{
-
-  movies: Movie[];
-  movie: MovieDetails;
-
-
-  constructor(private movieService: MovieService){
-
-    this.movies = [];
-    this.movie = new MovieDetails;
-
-
-  }
-
-  ngOnInit(){
-    // this.movieService.GetMovies().subscribe((movies) => {
-    //   this.movies = movies;
-    //
-    //
-    // })
-    //
-    //
-    // this.movieService.GetMovieDetails("cw0086190").then((movie) => {
-    //   this.movie = movie;
-    //
-    // })
-
-
-
-
-  }
-
-}
+export class AppComponent{}

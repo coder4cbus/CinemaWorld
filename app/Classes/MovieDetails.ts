@@ -16,6 +16,4 @@ export class MovieDetails extends Movie{
   Rating: string;
   Votes: string;
   Price: string;
-}/**
- * Created by jaype on 1/28/2017.
- */
+}

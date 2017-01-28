@@ -3,6 +3,7 @@ import {MovieService} from "../Services/movie.service";
 import {Router} from "@angular/router";
 import {Alert, GetType} from "../Classes/Alert";
 import {MovieDetails} from "../Classes/MovieDetails";
+import {Movie} from "../Classes/Movie";
 
 @Component({
   moduleId: module.id,
@@ -40,9 +41,9 @@ export class CheapestMoviesComponent
   {
     if(alert.getType == GetType.Details)
     {
-      this.pushMovieDetail(alert.id, alert.title);
+      this.getAndPushMovieDetail(alert.movieInfo);
     }
-    else
+    else if(alert.getType == GetType.List)
     {
       this.populateCheapestMovies();
     }
@@ -56,7 +57,7 @@ export class CheapestMoviesComponent
       if(movies)
       {
         movies.forEach(movie=>{
-          this.pushMovieDetail(movie.ID, movie.Title);
+          this.getAndPushMovieDetail(movie);
         })
       }
     },error=>{
@@ -75,9 +76,9 @@ export class CheapestMoviesComponent
     })
   }
 
-  private pushMovieDetail(movieID: string, title: string):void
+  private getAndPushMovieDetail(movieInfo: Movie):void
   {
-    this.movieService.GetMovieDetails2(movieID).subscribe(d=>{
+    this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d=>{
       this.moviesWithDetails.push(d);
 
       this.moviesWithDetails.sort((a:MovieDetails, b: MovieDetails)=>{
@@ -94,9 +95,9 @@ export class CheapestMoviesComponent
       {
         let alert = new Alert();
         alert.getType = GetType.Details;
-        alert.id=movieID
+        alert.movieInfo = movieInfo;
         alert.type = "danger";
-        alert.message= "Sorry, " + title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
+        alert.message= "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
         this.alerts.push(alert);
       }
       else

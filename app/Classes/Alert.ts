@@ -1,9 +1,9 @@
+import {Movie} from "./Movie";
 export class Alert {
-  id: string;
   type: string;
   message: string;
   getType: GetType;
-  title:string;
+  movieInfo: Movie;
 }
 
 export enum GetType

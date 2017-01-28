@@ -33,12 +33,11 @@
             <div class="genre">{{m.Genre}}</div>
           </div>
           <div class="col">
-            <div *ngIf="m.Rating">
-              <!--make a component for this later-->
-              <span *ngFor="let star of +m.Rating | fill">★</span>
-              <span *ngFor="let star of 10 - +m.Rating | fill">☆</span>
+            <div>{{m.Rating}}</div>
+            <div>
+              <span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>
             </div>
-            <div *ngIf="m.Votes">{{m.Votes}} ☺</div>
+            <div id="votes">{{m.Votes}} <span id="votes-icon"></span></div>
           </div>
         </div>
         <div class="row">

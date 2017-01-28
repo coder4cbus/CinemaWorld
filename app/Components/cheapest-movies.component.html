@@ -11,14 +11,13 @@
 
       <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="goToDetails(m.ID)">
       <div class="card-block">
-        <a class="card-title" href="#/movie-details/{{m.ID}}">{{m.Title}}</a>
+        <div class="card-title-div" ngbTooltip="{{m.Title}}">
+          <a class="card-title" href="#/movie-details/{{m.ID}}"  >{{m.Title}}</a>
+        </div>
         <div>
-        <!--make a component for this later-->
-        <span *ngFor="let star of +m.Rating | fill">★</span>
-        <span *ngFor="let star of 10 - +m.Rating | fill">☆</span>
-      </div>
+          <span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>
+        </div>
         <a id="price-text" class="card-text">$ {{m.Price}} Buy</a>
-
         <div *ngIf="i==0" id="cheapest-triangle"></div>
         <div *ngIf="i==0" id="cheapest-text">CHEAPEST</div>
 
