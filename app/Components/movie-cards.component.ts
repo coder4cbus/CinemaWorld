@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {MovieService} from "../Services/movie.service";
 import {Router} from "@angular/router";
 import {Alert, GetType} from "../Classes/Alert";
@@ -7,39 +7,39 @@ import {Movie} from "../Classes/Movie";
 
 @Component({
   moduleId: module.id,
-  selector: 'cheapest-movies',
-  templateUrl: 'cheapest-movies.component.html',
-  styleUrls:['cheapest-movies.component.css']
+  selector: 'movie-cards',
+  templateUrl: 'movie-cards.component.html',
+  styleUrls:['movie-cards.component.css']
 })
-export class CheapestMoviesComponent
+export class MovieCardsComponent
 {
   moviesWithDetails: MovieDetails[];
   private router: Router;
   alerts: Array<Alert>;
-  sortByCheapest:(a: MovieDetails, b: MovieDetails) =>number;
 
-    constructor(private movieService: MovieService, router: Router){
+  @Input()
+  isQuickLoading:boolean;
+
+  @Input()
+  topMarkerText:string;
+
+  @Input()
+  sortingLogic:(a: MovieDetails, b: MovieDetails) => number;
+
+  constructor(private movieService: MovieService, router: Router){
     this.router = router
     this.moviesWithDetails = [];
     this.alerts = [];
+    this.isQuickLoading = false;
   }
 
   ngOnInit(){
-   this.populateCheapestMovies();
-
-    this.sortByCheapest = (a: MovieDetails, b: MovieDetails) => {
-      if (+a.Price < +b.Price)
-        return -1;
-      if (+a.Price > +b.Price)
-        return 1;
-      return 0;
-    };
-
+    this.populateCheapestMovies();
   }
 
   goToDetails(id:string):void
   {
-     this.router.navigate(['/movie-details', id]);
+    this.router.navigate(['/movie-details', id]);
   }
 
   closeAlert(alert: Alert) {
@@ -86,35 +86,32 @@ export class CheapestMoviesComponent
     })
   }
 
-  private getAndPushMovieDetail(movieInfo: Movie):void
-  {
-    this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d=>{
-      this.moviesWithDetails.push(d);
+  private getAndPushMovieDetail(movieInfo: Movie):void {
 
-      this.moviesWithDetails.sort((a:MovieDetails, b: MovieDetails)=>{
-        if (+a.Price < +b.Price)
-          return -1;
-        if (+a.Price > +b.Price)
-          return 1;
-        return 0;
-      })
+    if (this.isQuickLoading == false) {
+      this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
+        this.moviesWithDetails.push(d);
+      }, error => {
 
-    }, error=>{
+        if (error.status = 503) {
+          let alert = new Alert();
+          alert.getType = GetType.Details;
+          alert.movieInfo = movieInfo;
+          alert.type = "danger";
+          alert.message = "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
+          this.alerts.push(alert);
+        }
+        else {
+          this.handlerGeneralErrors(error);
+        }
+      });
+    }
+    else
+    {
+      this.moviesWithDetails.push(movieInfo as MovieDetails);
+    }
 
-      if(error.status=503)
-      {
-        let alert = new Alert();
-        alert.getType = GetType.Details;
-        alert.movieInfo = movieInfo;
-        alert.type = "danger";
-        alert.message= "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-        this.alerts.push(alert);
-      }
-      else
-      {
-        this.handlerGeneralErrors(error);
-      }
-    });
+    this.moviesWithDetails.sort(this.sortingLogic);
   }
 
   private handlerGeneralErrors(error:any):void

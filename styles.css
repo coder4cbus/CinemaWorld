@@ -159,10 +159,8 @@ nav a.router-link-active {
 .movies-container
 {
   justify-content: center;
+  padding: 0px;
 }
-
-
-
 
 #full-star, #hollow-star, #half-star, #less-half-star, #more-half-star, #votes-icon
 {
@@ -200,6 +198,21 @@ nav a.router-link-active {
   width: 16px;
   height: 16px;
   background-size: 16px 16px;
+}
+
+.alert-row
+{
+  margin-top: 10px;
+  padding: 0px;
+}
+
+ngb-alert:hover
+{
+  cursor: pointer;
+}
+.alert
+{
+  margin-bottom: 0px !important;
 }
 
 

@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {MovieService} from "../Services/movie.service";
-import {Movie} from "../Classes/Movie";
+import {MovieDetails} from "../Classes/MovieDetails";
 
 @Component({
   moduleId: module.id,
@@ -10,16 +9,16 @@ import {Movie} from "../Classes/Movie";
 
 })
 export class HomeComponent implements OnInit{
-  movies: Movie[];
-
-  constructor(private movieService: MovieService){
-    this.movies = [];
-  }
+  sortByYear:(a: MovieDetails, b: MovieDetails) =>number;
 
   ngOnInit(){
-    this.movieService.GetMovies().subscribe((movies) => {
-      this.movies = movies;
-    })
+    this.sortByYear = (a: MovieDetails, b: MovieDetails) => {
+      if (+a.Year > +b.Year)
+        return -1;
+      if (+a.Year < +b.Year)
+        return 1;
+      return 0;
+    };
 
   }
 }

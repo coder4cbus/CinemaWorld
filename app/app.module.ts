@@ -9,6 +9,7 @@ import {CheapestMoviesComponent} from "./Components/cheapest-movies.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {StarMakerPipe} from "./Pipes/starMaker.pipe";
+import {MovieCardsComponent} from "./Components/movie-cards.component";
 
 @NgModule({
   imports: [ BrowserModule,
@@ -21,7 +22,8 @@ import {StarMakerPipe} from "./Pipes/starMaker.pipe";
     HomeComponent,
     MovieDetailsComponent,
     CheapestMoviesComponent,
-    StarMakerPipe],
+    StarMakerPipe,
+    MovieCardsComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

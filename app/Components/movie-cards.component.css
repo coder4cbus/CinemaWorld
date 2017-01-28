@@ -12,7 +12,7 @@
 .card
 {
   width: 200px;
-  height: 450px;
+  height: 400px;
   margin: 20px;
 }
 .card-title-div
@@ -39,7 +39,7 @@ a { color: inherit; }
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   position: absolute;
-  top: 404px;
+  top: 354px;
   left: 130px;
   font-weight: bold;
   color: white;
@@ -51,7 +51,7 @@ a { color: inherit; }
   border-bottom: 100px solid #bd4147;
   border-left: 100px solid transparent;
   position: absolute;
-  top: 355px ;
+  top: 305px ;
   left: 105px;
 }
 

@@ -17,3 +17,7 @@ export class MovieDetails extends Movie{
   Votes: string;
   Price: string;
 }
+
+interface Greeter {
+  (message: string): void;
+}
