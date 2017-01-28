@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {MovieService} from "./movie.service";
+import {MovieService} from "../Services/movie.service";
 import {Router} from "@angular/router";
-import {Alert, GetType} from "./Classes/Alert";
-import {MovieDetails} from "./Classes/MovieDetails";
+import {Alert, GetType} from "../Classes/Alert";
+import {MovieDetails} from "../Classes/MovieDetails";
 
 @Component({
   moduleId: module.id,

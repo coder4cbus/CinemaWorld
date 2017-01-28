@@ -1,13 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Movie, MovieDetails} from "./Classes/Movie";
+import {Movie} from "../Classes/Movie";
 import {HttpClient} from "./http-client.service";
 import 'rxjs/add/operator/toPromise';
-import {urlPrefix} from "./constants";
+import {urlPrefix} from "../constants";
 import {Observable} from "rxjs";
 import 'rxjs/Rx';
-/**
- * Created by jaype on 1/22/2017.
- */
+import {MovieDetails} from "../Classes/MovieDetails";
 
 @Injectable()
 export class MovieService {
@@ -24,9 +22,4 @@ export class MovieService {
       return response.json() as MovieDetails;
     })
   }
-
-  // private handleError(error: any): Promise<any> {
-  //   console.error('An error occurred', error); // for demo purposes only
-  //   return Promise.reject(error.message || error);
-  // }
 }

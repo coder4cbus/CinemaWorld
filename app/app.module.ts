@@ -1,13 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }  from './app.component';
+import { AppComponent }  from './Components/app.component';
 import {HttpModule, JsonpModule} from "@angular/http";
 import {AppRoutingModule} from "./app-routing.module";
-import {HomeComponent} from "./home.component";
-import {MovieDetailsComponent} from "./movie-details.component";
-import {CheapestMoviesComponent} from "./cheapest-movies.component";
+import {HomeComponent} from "./Components/home.component";
+import {MovieDetailsComponent} from "./Components/movie-details.component";
+import {CheapestMoviesComponent} from "./Components/cheapest-movies.component";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
-import {FillPipe} from "./fill.pipe";
+import {FillPipe} from "./Pipes/fill.pipe";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
