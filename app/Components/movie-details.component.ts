@@ -1,10 +1,11 @@
 
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MovieService} from "../Services/movie.service";
 import {MovieDetails} from "../Classes/MovieDetails";
 import {Alert, GetType} from "../Classes/Alert";
 import {MoviesCacheService} from "../Services/movies-cache.service";
+import {Subscription} from "rxjs";
 @Component({
   moduleId : module.id,
   selector: 'movie-details',
@@ -18,6 +19,7 @@ export class MovieDetailsComponent implements OnInit
   alert:Alert;
   id:string;
   isLoading:boolean;
+  movieDetailSubsriber: Subscription;
 
   checkIfHaveNullProperties(): boolean
   {
@@ -60,6 +62,11 @@ export class MovieDetailsComponent implements OnInit
     });
   }
 
+  ngOnDestroy() {
+    if (this.movieDetailSubsriber) {
+      this.movieDetailSubsriber.unsubscribe();
+    }
+  }
 
   private handlerGeneralErrors(error:any):void
   {
@@ -72,7 +79,8 @@ export class MovieDetailsComponent implements OnInit
   private getMovieDetails(id:string):void
   {
     this.isLoading = true;
-    this.movieService.GetMovieDetails(id).subscribe((response) => {
+
+    this.movieDetailSubsriber = this.movieService.GetMovieDetails(id).subscribe((response) => {
         this.m = response;
         this.isLoading = false;
       }, error => {
@@ -127,5 +135,4 @@ export class MovieDetailsComponent implements OnInit
     this.alert = alert;
 
   }
-
 }

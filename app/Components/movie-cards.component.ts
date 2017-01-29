@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy} from "@angular/core";
+import {Component, Input, OnInit, OnDestroy, EventEmitter, Output} from "@angular/core";
 import {MovieService} from "../Services/movie.service";
 import {Router} from "@angular/router";
 import {Alert, GetType} from "../Classes/Alert";
@@ -6,7 +6,6 @@ import {MovieDetails} from "../Classes/MovieDetails";
 import {Movie} from "../Classes/Movie";
 import {MoviesCacheService} from "../Services/movies-cache.service";
 import {Observable, Subscription} from "rxjs";
-import {subscribeOn} from "rxjs/operator/subscribeOn";
 
 @Component({
   moduleId: module.id,
@@ -30,6 +29,9 @@ export class MovieCardsComponent implements OnInit,OnDestroy
 
   @Input()
   sortingLogic:(a: MovieDetails, b: MovieDetails) => number;
+
+  @Output()
+  moviesWithDetailsUpdated = new EventEmitter();
 
   constructor(private movieService: MovieService, router: Router, private movieCacheService:MoviesCacheService){
     this.router = router
@@ -101,9 +103,11 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   private getAndPushMovieDetail(movieInfo: Movie):void {
 
     if (this.isQuickLoading == false) {
+      this.isLoading=true;
       let subscription = this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
-        this.moviesWithDetails.push(d);
+        this.updateMovies(d);
         this.movieCacheService.updateMovieDetails(d); //this is a full movie details. Store to cache.
+        this.isLoading=false;
       }, error => {
 
         if (error.status = 503) {
@@ -117,18 +121,24 @@ export class MovieCardsComponent implements OnInit,OnDestroy
         else {
           this.handlerGeneralErrors(error);
         }
+        this.isLoading=false;
       });
       this.subscriptions.push(subscription);
     }
     else
     {
-      this.moviesWithDetails.push(movieInfo as MovieDetails);
+      this.updateMovies(movieInfo as MovieDetails);
       this.movieCacheService.updateMovie(movieInfo); //this is a partial movie, add to cache
     }
 
     this.moviesWithDetails.sort(this.sortingLogic);
   }
 
+  private updateMovies(movieInfo:MovieDetails)
+  {
+    this.moviesWithDetails.push(movieInfo as MovieDetails);
+    this.moviesWithDetailsUpdated.emit(this.moviesWithDetails);
+  }
   private handlerGeneralErrors(error:any):void
   {
     let alert = new Alert();

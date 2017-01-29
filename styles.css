@@ -1,4 +1,8 @@
 /* Master Styles */
+html
+{
+  min-width: 410px;
+}
 h1 {
   color: #369;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -153,7 +157,8 @@ nav a.router-link-active {
 
 .movie-box
 {
-  box-shadow: 0px 0px 10px #888888;
+  box-shadow: 0px 0px 5px rgba(136, 136, 136, 0.23);
+
   background-color: white;
 }
 .movies-container
@@ -203,6 +208,7 @@ nav a.router-link-active {
 .alert-row
 {
   margin-top: 10px;
+  margin-bottom: 10px;
   padding: 0px;
 }
 
@@ -213,6 +219,11 @@ ngb-alert:hover
 .alert
 {
   margin-bottom: 0px !important;
+}
+
+.component-headers
+{
+  margin-bottom: 10px !important;
 }
 
 

@@ -4,7 +4,7 @@
     <ngb-alert *ngFor="let alert of alerts"  [type]="alert.type" [dismissible]="true" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>
   </div>
 </div>
-<div class="row justify-content-lg-center movies-container">
+<div class="row justify-content-sm-center justify-content-md-start justify-content-xl-start movies-container">
   <div *ngFor="let m of moviesWithDetails; let i = index">
     <div class="card movie-box">
       <img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="goToDetails(m.ID)">

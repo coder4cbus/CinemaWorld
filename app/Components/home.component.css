@@ -2,3 +2,42 @@
   width:137px;
   height:189px;
 }
+
+/*.image-slideshow*/
+/*{*/
+  /*width: 300px;*/
+  /*height: 443px;*/
+/*}*/
+
+.image-slideshow
+{
+  width: 490px;
+  height: 679px;
+}
+.carousel
+{
+  width: 490px;
+  height: 679px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.col-slideshow
+{
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  width: 490px;
+  height: 679px;
+  justify-content: center;
+}
+.row-slideshow
+{
+  padding: 0px;
+}
+
+.col-cards
+{
+  padding: 0px;
+  width: 100%;
+}

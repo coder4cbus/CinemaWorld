@@ -10,6 +10,12 @@ import {MovieDetails} from "../Classes/MovieDetails";
 })
 export class HomeComponent implements OnInit{
   sortByYear:(a: MovieDetails, b: MovieDetails) =>number;
+  movies:MovieDetails[];
+
+  constructor()
+  {
+    this.movies=[];
+  }
 
   ngOnInit(){
     this.sortByYear = (a: MovieDetails, b: MovieDetails) => {
@@ -20,5 +26,11 @@ export class HomeComponent implements OnInit{
       return 0;
     };
 
+
+  }
+
+  handleMoviesWithDetailsUpdated(moviesFromCards: MovieDetails[])
+  {
+      this.movies = moviesFromCards;
   }
 }
