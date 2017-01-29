@@ -4,6 +4,7 @@ export class Alert {
   message: string;
   getType: GetType;
   movieInfo: Movie;
+  isDismissible:boolean = true;
 }
 
 export enum GetType

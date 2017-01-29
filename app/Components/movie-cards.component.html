@@ -1,3 +1,4 @@
+<div *ngIf="isLoading" class="loading">Loading&#8230;</div>
 <div *ngIf="alerts && alerts.length!=0" class="row alert-row">
   <div class="col">
     <ngb-alert *ngFor="let alert of alerts"  [type]="alert.type" [dismissible]="true" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>

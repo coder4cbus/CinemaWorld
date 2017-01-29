@@ -1,28 +1,4 @@
 <h2>Cheapest Movies</h2>
 <movie-cards [isQuickLoading]="false" [topMarkerText]="'CHEAPEST'" [sortingLogic]="sortByCheapest"></movie-cards>
 
-<!--<div *ngIf="alerts && alerts.length!=0" class="row alert-row">-->
-  <!--<div class="col">-->
-    <!--<ngb-alert *ngFor="let alert of alerts"  [type]="alert.type" [dismissible]="true" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>-->
-  <!--</div>-->
-<!--</div>-->
-<!--<div class="row justify-content-lg-center movies-container">-->
-  <!--<div *ngFor="let m of moviesWithDetails; let i = index">-->
-    <!--<div class="card movie-box">-->
-      <!--<img class="card-img-top" src="{{m.Poster}}" alt="Card image cap" (click)="goToDetails(m.ID)">-->
-      <!--<div class="card-block">-->
-        <!--<div class="card-title-div" ngbTooltip="{{m.Title}}">-->
-          <!--<a class="card-title" href="#/movie-details/{{m.ID}}"  >{{m.Title}}</a>-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>-->
-        <!--</div>-->
-        <!--<a id="price-text" class="card-text">$ {{m.Price}} Buy</a>-->
-        <!--<div *ngIf="i==0" id="cheapest-triangle"></div>-->
-        <!--<div *ngIf="i==0" id="cheapest-text">CHEAPEST</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
 

@@ -1,4 +1,11 @@
-<div id="main-row" *ngIf="m.Poster &&
+<div *ngIf="isLoading" class="loading">Loading&#8230;</div>
+<div *ngIf="alert" class="row alert-row">
+  <div class="col">
+    <ngb-alert [type]="alert.type" [dismissible]="alert.isDismissible" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>
+  </div>
+</div>
+<div id="main-row" *ngIf="m &&
+            m.Poster &&
             m.Title &&
             m.Year &&
             m.Released &&
@@ -42,7 +49,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <button class="btn-primary">$ {{m.Price}} Buy</button>
+            <button class="btn-primary" (click)="buyMovie()">$ {{m.Price}} Buy</button>
           </div>
         </div>
       </div>

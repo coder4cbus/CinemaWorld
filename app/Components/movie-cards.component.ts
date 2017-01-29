@@ -1,9 +1,12 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit, OnDestroy} from "@angular/core";
 import {MovieService} from "../Services/movie.service";
 import {Router} from "@angular/router";
 import {Alert, GetType} from "../Classes/Alert";
 import {MovieDetails} from "../Classes/MovieDetails";
 import {Movie} from "../Classes/Movie";
+import {MoviesCacheService} from "../Services/movies-cache.service";
+import {Observable, Subscription} from "rxjs";
+import {subscribeOn} from "rxjs/operator/subscribeOn";
 
 @Component({
   moduleId: module.id,
@@ -11,11 +14,13 @@ import {Movie} from "../Classes/Movie";
   templateUrl: 'movie-cards.component.html',
   styleUrls:['movie-cards.component.css']
 })
-export class MovieCardsComponent
+export class MovieCardsComponent implements OnInit,OnDestroy
 {
   moviesWithDetails: MovieDetails[];
   private router: Router;
   alerts: Array<Alert>;
+  subscriptions:Subscription[];
+  isLoading:boolean;
 
   @Input()
   isQuickLoading:boolean;
@@ -26,11 +31,13 @@ export class MovieCardsComponent
   @Input()
   sortingLogic:(a: MovieDetails, b: MovieDetails) => number;
 
-  constructor(private movieService: MovieService, router: Router){
+  constructor(private movieService: MovieService, router: Router, private movieCacheService:MoviesCacheService){
     this.router = router
     this.moviesWithDetails = [];
     this.alerts = [];
+    this.subscriptions=[];
     this.isQuickLoading = false;
+    this.isLoading = false;
   }
 
   ngOnInit(){
@@ -63,13 +70,15 @@ export class MovieCardsComponent
   private populateCheapestMovies():void
   {
     this.moviesWithDetails = [];
-    this.movieService.GetMovies().subscribe(movies=>{
+    this.isLoading = true;
+    let subscription = this.movieService.GetMovies().subscribe(movies=>{
       if(movies)
       {
         movies.forEach(movie=>{
           this.getAndPushMovieDetail(movie);
         })
       }
+      this.isLoading = false;
     },error=>{
 
       if(error.status=503) {
@@ -83,14 +92,18 @@ export class MovieCardsComponent
       {
         this.handlerGeneralErrors(error);
       }
-    })
+      this.isLoading = false;
+    });
+
+    this.subscriptions.push(subscription);
   }
 
   private getAndPushMovieDetail(movieInfo: Movie):void {
 
     if (this.isQuickLoading == false) {
-      this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
+      let subscription = this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
         this.moviesWithDetails.push(d);
+        this.movieCacheService.updateMovieDetails(d); //this is a full movie details. Store to cache.
       }, error => {
 
         if (error.status = 503) {
@@ -105,10 +118,12 @@ export class MovieCardsComponent
           this.handlerGeneralErrors(error);
         }
       });
+      this.subscriptions.push(subscription);
     }
     else
     {
       this.moviesWithDetails.push(movieInfo as MovieDetails);
+      this.movieCacheService.updateMovie(movieInfo); //this is a partial movie, add to cache
     }
 
     this.moviesWithDetails.sort(this.sortingLogic);
@@ -120,6 +135,14 @@ export class MovieCardsComponent
     alert.type = "danger";
     alert.message = error.toString();
     this.alerts.push()
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription=>{
+      subscription.unsubscribe();
+      let index = this.subscriptions.indexOf(subscription);
+      this.subscriptions.splice(index,1)
+    })
   }
 
 }
