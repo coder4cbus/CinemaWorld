@@ -39,7 +39,7 @@
         <div>
           <span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>
         </div>
-        <a *ngIf="m.Price && m.Price!=''" id="price-text" class="card-text">$ {{m.Price}} Buy</a>
+        <a *ngIf="m.Price && m.Price!=''" id="price-text" class="card-text" (click)="buyMovie()">$ {{m.Price}} Buy</a>
         <div *ngIf="i==0" id="cheapest-triangle"></div>
         <div *ngIf="i==0" id="cheapest-text">{{topMarkerText}}</div>
       </div>

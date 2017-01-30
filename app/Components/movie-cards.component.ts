@@ -154,4 +154,13 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     })
   }
 
+  buyMovie()
+  {
+    let alert = new Alert();
+    alert.type = "info";
+    alert.message = "Sorry, unable to buy this movie right now. Thi functionality is still under construction."
+    this.alerts.push(alert);
+
+  }
+
 }
