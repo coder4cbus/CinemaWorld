@@ -19,6 +19,5 @@ export class CheapestMoviesComponent
         return 1;
       return 0;
     };
-
   }
 }

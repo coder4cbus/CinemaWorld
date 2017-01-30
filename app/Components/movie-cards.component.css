@@ -2,6 +2,8 @@
 .card-img-top {
   width:200px;
   height:275px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: transparent;
 }
 
 .card-img-top:hover {
@@ -61,4 +63,54 @@ a { color: inherit; }
   font-weight: bolder;
 }
 
+/*SLIDE SHOW*/
+.image-slideshow
+{
+  width: 490px;
+  height: 679px;
+  margin-top: -200px;
+  cursor: pointer;
+}
+.carousel
+{
+  width: 411px;
+  height: 400px;
+  margin: 5px;
+  padding: 0px;
+  border: 0px;
+}
+.movie-slideshow
+{
+  padding: 0px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  width: 411px;
+  height: 405px;
+  justify-content: center;
+  overflow: hidden;
+
+
+}
+.row-slideshow
+{
+  padding: 0px;
+}
+
+.col-cards
+{
+  padding: 0px;
+  width: 100%;
+}
+
+.movie-box
+{
+  box-shadow: 0px 0px 5px rgba(136, 136, 136, 0.23);
+  background-color: white;
+}
+
+.movies-container
+{
+  justify-content: center;
+  padding: 0px;
+}
 

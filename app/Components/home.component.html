@@ -1,35 +1,8 @@
-
-
-
 <h2 class="component-headers">New Releases</h2>
-<div class="row-slideshow d-flex flex-row">
-  <div *ngIf="movies && movies.length!=0" class="col-slideshow ">
-    <div id="carouselExampleIndicators" class="carousel slide movie-box" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-
-        <div *ngFor="let m of movies; let i = index" class="carousel-item" [class.active]="i==0">
-          <img class="image-slideshow d-block img-fluid" src="{{m.Poster}}" alt="Third slide">
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-  <div class="col-cards">
+<div class="col-cards">
     <movie-cards [isQuickLoading]="true"
                  [topMarkerText]="'LATEST'"
                  [sortingLogic]="sortByYear"
                  (moviesWithDetailsUpdated)="handleMoviesWithDetailsUpdated($event)"></movie-cards>
   </div>
-</div>
+

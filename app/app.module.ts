@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule,enableProdMode}      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './Components/app.component';
 import {HttpModule, JsonpModule} from "@angular/http";
@@ -10,6 +10,7 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {StarMakerPipe} from "./Pipes/starMaker.pipe";
 import {MovieCardsComponent} from "./Components/movie-cards.component";
+enableProdMode();
 
 @NgModule({
   imports: [ BrowserModule,

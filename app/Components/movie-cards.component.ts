@@ -130,13 +130,12 @@ export class MovieCardsComponent implements OnInit,OnDestroy
       this.updateMovies(movieInfo as MovieDetails);
       this.movieCacheService.updateMovie(movieInfo); //this is a partial movie, add to cache
     }
-
-    this.moviesWithDetails.sort(this.sortingLogic);
   }
 
   private updateMovies(movieInfo:MovieDetails)
   {
     this.moviesWithDetails.push(movieInfo as MovieDetails);
+    this.moviesWithDetails.sort(this.sortingLogic);
     this.moviesWithDetailsUpdated.emit(this.moviesWithDetails);
   }
   private handlerGeneralErrors(error:any):void
