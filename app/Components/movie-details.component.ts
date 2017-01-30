@@ -1,6 +1,6 @@
 
 import {Component, OnInit, OnDestroy} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MovieService} from "../Services/movie.service";
 import {MovieDetails} from "../Classes/MovieDetails";
 import {Alert, GetType} from "../Classes/Alert";
@@ -12,7 +12,7 @@ import {Subscription} from "rxjs";
   templateUrl:'movie-details.component.html',
   styleUrls:['movie-details.component.css']
 })
-export class MovieDetailsComponent implements OnInit
+export class MovieDetailsComponent implements OnInit,OnDestroy
 {
   m: MovieDetails;
   router:Router;
@@ -34,11 +34,8 @@ export class MovieDetailsComponent implements OnInit
     }
   }
 
-
-
   constructor(private route: ActivatedRoute,
               private movieService: MovieService,
-              router: Router,
               private movieCacheService: MoviesCacheService){
     this.m = new MovieDetails();
     this.alert = null;

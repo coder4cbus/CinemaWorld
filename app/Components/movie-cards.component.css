@@ -25,7 +25,7 @@
   text-overflow: ellipsis;
 }
 
-.card-title:hover, #price-text:hover {
+.card-title:hover, .price-text:hover {
   cursor: pointer;
   text-decoration: underline;
 
@@ -34,7 +34,7 @@
 a { color: inherit; }
 
 
-#cheapest-text {
+.cheapest-text {
   font-size: medium;
   color: black;
   -ms-transform: rotate(-45deg);
@@ -47,7 +47,7 @@ a { color: inherit; }
   color: white;
 }
 
-#cheapest-triangle {
+.cheapest-triangle {
   width: 0;
   height: 0;
   border-bottom: 100px solid #bd4147;
@@ -57,10 +57,10 @@ a { color: inherit; }
   left: 105px;
 }
 
-#price-text
+.price-text
 {
-  color: #bd4147;
-  font-weight: bolder;
+  color: #bd4147 !important;
+  font-weight: bolder !important;
 }
 
 /*SLIDE SHOW*/

@@ -7,7 +7,7 @@ import { By }           from '@angular/platform-browser';
 
 ////////  SPECS  /////////////
 
-/// Delete this
+/// UNIT TEST IS NOT YET INPLEMENTED
 describe('Smoke test', () => {
   it('should run a passing test', () => {
     expect(true).toEqual(true, 'should pass');
