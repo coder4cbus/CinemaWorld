@@ -10,4 +10,5 @@ import {MoviesCacheService} from "../Services/movies-cache.service";
     styleUrls:['app.component.css'],
     providers:[MovieService, HttpClient, MoviesCacheService],
 })
+
 export class AppComponent{}

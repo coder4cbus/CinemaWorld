@@ -1,37 +1,53 @@
-/* tslint:disable:no-unused-variable */
 import { AppComponent } from './app.component';
 
-import { TestBed }      from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Router} from "@angular/router";
 
-////////  SPECS  /////////////
+describe('AppComponent', function () {
+  let comp: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
-/// UNIT TEST IS NOT YET INPLEMENTED
-describe('Smoke test', () => {
-  it('should run a passing test', () => {
-    expect(true).toEqual(true, 'should pass');
-  });
-});
+  beforeEach(async(() => {
+    var RouterStub;
+    TestBed.configureTestingModule({
+      declarations: [ AppComponent ],
+      schemas:      [ NO_ERRORS_SCHEMA ], //to ignore router outlet errors
+      providers:[{provide:Router, useClass: RouterStub}]
+    })
+      .compileComponents();
+  }));
 
-describe('AppComponent with TCB', function () {
   beforeEach(() => {
-    TestBed.configureTestingModule({declarations: [AppComponent]});
+    fixture = TestBed.createComponent(AppComponent);
+    comp = fixture.componentInstance;
+    //de = fixture.debugElement.query(By.css('h1'));
   });
 
-  it('should instantiate component', () => {
-    let fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance instanceof AppComponent).toBe(true, 'should create AppComponent');
-  });
+  it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have expected <h1> text', () => {
-    let fixture = TestBed.createComponent(AppComponent);
+  it('should have expected CinemaWorld title', () => {
+    let de = fixture.debugElement.query(By.css('.navbar-brand'));
     fixture.detectChanges();
+    const h1 = de.nativeElement;
+    expect(h1.innerText).toMatch('CinemaWorld',
+      'Show Cinema World Title');
+  });
 
-    let h1 = fixture.debugElement.query(el => el.name === 'h1').nativeElement;  // it works
+  it('should have expected Home link', () => {
+    let de = fixture.debugElement.query(By.css('[routerLink="/home"]'));
+    fixture.detectChanges();
+    const h1 = de.nativeElement;
+    expect(h1.innerText).toMatch('Home',
+      'Show Home link');
+  });
 
-        h1 = fixture.debugElement.query(By.css('h1')).nativeElement;            // preferred
-
-    expect(h1.innerText).toMatch(/angular app/i, '<h1> should say something about "Angular App"');
+  it('should have expected Chepest link', () => {
+    let de = fixture.debugElement.query(By.css('[routerLink="/cheapest-movies"]'));
+    fixture.detectChanges();
+    const h1 = de.nativeElement;
+    expect(h1.innerText).toMatch('Cheapest',
+      'Show Home link');
   });
 });

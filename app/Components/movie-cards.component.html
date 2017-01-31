@@ -36,7 +36,7 @@
         <div class="card-title-div" ngbTooltip="{{m.Title}}">
           <a class="card-title" href="#/movie-details/{{m.ID}}"  >{{m.Title}}</a>
         </div>
-        <div>
+        <div ngbTooltip="{{m.Rating}}">
           <span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>
         </div>
         <a *ngIf="m.Price && m.Price!=''" class="card-text price-text" (click)="buyMovie()">$ {{m.Price}} Buy</a>
