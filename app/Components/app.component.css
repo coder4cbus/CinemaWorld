@@ -18,6 +18,7 @@ nav a:hover
 {
   font-size: 50px;
   color:gray;
+  cursor: pointer;
 }
 
 .navbar-main
@@ -34,4 +35,9 @@ nav a:hover
   font-size: 50px;
   color: #bd4147;
   font-family: 'Montserrat', sans-serif;
+}
+
+#cinema-text:hover
+{
+  color: #D9454B;
 }

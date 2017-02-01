@@ -1,5 +1,4 @@
-﻿﻿//this wis act as interceptor in angular js 2
-
+﻿import {Config} from "../constants";
 import { Injectable } from '@angular/core';
 import {Http, Headers,} from '@angular/http';
 import constants = require('../constants');
@@ -11,14 +10,11 @@ export class HttpClient {
 
   get(url: string) {
     let headers = new Headers();
-    headers.append('x-access-token', constants.token);
+    headers.append('x-access-token', Config.token);
 
     return this.http.get(url,  {
       headers: headers
-    }).share();
-    //.retry(3);
+    }).share()
+    .retry(3);
   }
-
-
-
 }

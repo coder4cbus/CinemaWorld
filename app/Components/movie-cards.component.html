@@ -5,7 +5,6 @@
   </div>
 </div>
 <div class="row justify-content-sm-center justify-content-md-start justify-content-xl-start movies-container">
-
   <div *ngIf="moviesWithDetails && moviesWithDetails.length!=0" class="movie-slideshow">
     <div id="carouselExampleIndicators" class="carousel slide movie-box" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -14,7 +13,6 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
-
         <div *ngFor="let m of moviesWithDetails; let i = index" class="carousel-item" [class.active]="i==0" title="{{m.Title}}">
           <img class="image-slideshow d-block img-fluid" src="{{m.Poster}}" (click)="goToDetails(m.ID)" alt="{{m.Title}} image cannot be loaded">
         </div>

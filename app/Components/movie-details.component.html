@@ -1,7 +1,7 @@
 <div *ngIf="isLoading" class="loading">Loading&#8230;</div>
 <div *ngIf="alert" class="row alert-row">
   <div class="col">
-    <ngb-alert [type]="alert.type" [dismissible]="alert.isDismissible" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>
+    <ngb-alert [type]="alert.type" [dismissible]="true" (close)="closeAlert(alert)" (click)="clickAlert(alert)">{{alert.message}}</ngb-alert>
   </div>
 </div>
 <div id="main-row" *ngIf="movieDetails &&

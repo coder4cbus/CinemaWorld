@@ -1,12 +1,12 @@
-
-.card-img-top {
+.card-img-top
+{
   width:200px;
   height:275px;
   background-color: rgba(0, 0, 0, 0.1);
   border-color: transparent;
 }
-
-.card-img-top:hover {
+.card-img-top:hover
+{
   opacity: 0.5;
   filter: alpha(opacity=50); /* For IE8 and earlier */
   cursor: pointer;
@@ -24,16 +24,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .card-title:hover, .price-text:hover {
   cursor: pointer;
   text-decoration: underline;
 
 }
-
-a { color: inherit; }
-
-
+a
+{
+  color: inherit;
+}
 .cheapest-text {
   font-size: medium;
   color: black;
@@ -46,7 +45,6 @@ a { color: inherit; }
   font-weight: bold;
   color: white;
 }
-
 .cheapest-triangle {
   width: 0;
   height: 0;
@@ -56,7 +54,6 @@ a { color: inherit; }
   top: 305px ;
   left: 105px;
 }
-
 .price-text
 {
   color: #bd4147 !important;
@@ -88,26 +85,21 @@ a { color: inherit; }
   height: 405px;
   justify-content: center;
   overflow: hidden;
-
-
 }
 .row-slideshow
 {
   padding: 0px;
 }
-
 .col-cards
 {
   padding: 0px;
   width: 100%;
 }
-
 .movie-box
 {
   box-shadow: 0px 0px 5px rgba(136, 136, 136, 0.23);
   background-color: white;
 }
-
 .movies-container
 {
   justify-content: center;

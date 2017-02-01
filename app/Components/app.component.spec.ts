@@ -1,5 +1,6 @@
-import { AppComponent } from './app.component';
+//Unit test for AppComponent
 
+import { AppComponent } from './app.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
@@ -26,7 +27,7 @@ describe('AppComponent', function () {
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have CinemaWorld title', () => {
+  it('should have "CinemaWorld" title', () => {
     let de = fixture.debugElement.query(By.css('.navbar-brand'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
@@ -34,15 +35,15 @@ describe('AppComponent', function () {
       'Show Cinema World Title');
   });
 
-  it('should have Home link', () => {
-    let de = fixture.debugElement.query(By.css('[routerLink="/home"]'));
+  it('should have "Home" link', () => {
+    let de = fixture.debugElement.query(By.css('a[routerLink="/home"]'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
     expect(h1.innerText).toMatch('Home',
       'Show Home link');
   });
 
-  it('should have expected Cheapest link', () => {
+  it('should have "Cheapest" link', () => {
     let de = fixture.debugElement.query(By.css('[routerLink="/cheapest-movies"]'));
     fixture.detectChanges();
     const h1 = de.nativeElement;

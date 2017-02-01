@@ -1,3 +1,5 @@
+//Unit Test for MovieDetailsComponent
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MovieDetailsComponent} from "./movie-details.component";
@@ -53,6 +55,7 @@ describe('MovieDetailsComponent', function () {
 
   it('should retrieve movie from server if not in cached during ngOnInit', () => {
 
+
     var params = {
       'cw0080684':Observable.of( MovieDummyConstants.cw0080684)
     }
@@ -64,12 +67,15 @@ describe('MovieDetailsComponent', function () {
 
     comp.ngOnInit();
 
+    expect(comp.movieDetails.ID).toEqual(MovieDummyConstants.cw0080684.ID);
+
+
   })
 
   it('should retrieve movie from cache if found during ngOnInit', () => {
 
     var params = {
-      'cw0080684':Observable.of( MovieDummyConstants.cw0080684)
+      'cw0080684':MovieDummyConstants.cw0080684
     }
 
     let movieServiceCache: MovieService = fixture.debugElement.injector.get(MoviesCacheService);
@@ -78,6 +84,8 @@ describe('MovieDetailsComponent', function () {
     });
 
     comp.ngOnInit();
+
+    expect(comp.movieDetails.ID).toEqual(MovieDummyConstants.cw0080684.ID);
 
   })
 
@@ -94,7 +102,7 @@ describe('MovieDetailsComponent', function () {
 
     comp.ngOnInit();
 
-    expect(comp.alert.movieInfo.ID).toEqual("cw0080684");
+    expect(comp.alert.movieInfo.ID).toEqual(MovieDummyConstants.cw0080684.ID);
     expect(comp.alert.message).toEqual("Sorry, the selected movie cannot be displayed at this moment. Please click this alert or refresh this page to try again.");
 
   })
@@ -122,7 +130,7 @@ describe('MovieDetailsComponent', function () {
     comp.ngOnInit();
 
     expect(comp.isLoading).toEqual(false);
-    expect(comp.alert.movieInfo.ID).toEqual("cw0080684");
+    expect(comp.alert.movieInfo.ID).toEqual(MovieDummyConstants.cw0080684_partial.ID);
     expect(comp.alert.message).toEqual("Sorry, " + MovieDummyConstants.cw0080684_partial.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.");
 
   })

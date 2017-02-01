@@ -7,6 +7,7 @@ import {Movie} from "../Classes/Movie";
 import {MoviesCacheService} from "../Services/movies-cache.service";
 import {Subscription} from "rxjs";
 
+//Component that creates card display for movies
 @Component({
   moduleId: module.id,
   selector: 'movie-cards',
@@ -21,16 +22,20 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   subscriptions:Subscription[];
   isLoading:boolean;
 
+  //set to true to retrieve only the movie list. Set to false to retrieve the full details for each movie.
   @Input()
   isQuickLoading:boolean;
 
+  //set text of top marker.
   @Input()
   topMarkerText:string;
 
+  //set delagate for sorting logic.
   @Input()
   sortingLogic:(a: MovieDetails, b: MovieDetails) => number;
 
-  constructor(private movieService: MovieService, router: Router, private movieCacheService:MoviesCacheService){
+  constructor(private movieService: MovieService, router: Router, private movieCacheService:MoviesCacheService)
+  {
     this.router = router
     this.moviesWithDetails = [];
     this.alerts = [];
@@ -40,109 +45,39 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   }
 
   ngOnInit(){
-    this.populateCheapestMovies();
+    this.getMovies();
   }
 
+  //navigates to movie detail.
   goToDetails(id:string):void
   {
     this.router.navigate(['/movie-details', id]);
   }
 
-  closeAlert(alert: Alert) {
+  //closes the alert box
+  closeAlert(alert: Alert)
+  {
     const index: number = this.alerts.indexOf(alert);
     this.alerts.splice(index, 1);
   }
 
+  //closes the alert box and tries to retrieve again the movie list/ details.
   clickAlert(alert:Alert)
   {
-    if(alert.getType == GetType.Details)
+    if(alert.getType == GetType.Details) //alert box when get movie details has error.
     {
-      this.getAndPushMovieDetail(alert.movieInfo);
+      this.getMovieDetails(alert.movieInfo); //get the movie details again.
     }
-    else if(alert.getType == GetType.List)
+    else if(alert.getType == GetType.List) //alert box when get movie list has error.
     {
-      this.populateCheapestMovies();
+      this.getMovies(); //get the movie list again.
     }
     this.closeAlert(alert);
   }
 
-  private populateCheapestMovies():void
+  //when switch to another component, this will stop all of the ongoing http requests.
+  ngOnDestroy()
   {
-    this.moviesWithDetails = [];
-    this.isLoading = true;
-    let subscription = this.movieService.GetMovies().subscribe(movies=>{
-      if(movies)
-      {
-        movies.forEach(movie=>{
-          this.getAndPushMovieDetail(movie);
-        })
-      }
-      this.isLoading = false;
-    },error=>{
-
-      if(error.status=503) {
-        let alert = new Alert();
-        alert.getType = GetType.List;
-        alert.type = "danger";
-        alert.message = "Sorry, Movie list cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-        this.alerts.push(alert);
-      }
-      else
-      {
-        this.handlerGeneralErrors(error);
-      }
-      this.isLoading = false;
-    });
-
-    this.subscriptions.push(subscription);
-  }
-
-  private getAndPushMovieDetail(movieInfo: Movie):void {
-
-    if (this.isQuickLoading == false) {
-      this.isLoading=true;
-      let subscription = this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
-        this.updateMovies(d);
-        this.movieCacheService.updateMovieDetails(d); //this is a full movie details. Store to cache.
-        this.isLoading=false;
-      }, error => {
-
-        if (error.status = 503) {
-          let alert = new Alert();
-          alert.getType = GetType.Details;
-          alert.movieInfo = movieInfo;
-          alert.type = "danger";
-          alert.message = "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-          this.alerts.push(alert);
-        }
-        else {
-          this.handlerGeneralErrors(error);
-        }
-        this.isLoading=false;
-      });
-      this.subscriptions.push(subscription);
-    }
-    else
-    {
-      this.updateMovies(movieInfo as MovieDetails);
-      this.movieCacheService.updateMovie(movieInfo); //this is a partial movie, add to cache
-    }
-  }
-
-  private updateMovies(movieInfo:MovieDetails)
-  {
-    this.moviesWithDetails.push(movieInfo as MovieDetails);
-    this.moviesWithDetails.sort(this.sortingLogic);
-  }
-  private handlerGeneralErrors(error:any):void
-  {
-    let alert = new Alert();
-    alert.type = "danger";
-    alert.message = error.toString();
-    this.alerts.push()
-  }
-
-  ngOnDestroy() {
     this.subscriptions.forEach(subscription=>{
       subscription.unsubscribe();
       let index = this.subscriptions.indexOf(subscription);
@@ -159,4 +94,89 @@ export class MovieCardsComponent implements OnInit,OnDestroy
 
   }
 
+  //retrieves all movie list.
+  private getMovies():void
+  {
+    this.moviesWithDetails = [];
+    this.isLoading = true;
+    let subscription = this.movieService.GetMovies().subscribe(movies=>
+    {
+      if(movies)
+      {
+        movies.forEach(movie=>
+        {
+          this.getMovieDetails(movie);
+        })
+      }
+      this.isLoading = false;
+    },error=>
+    {
+      if(error.status=503)
+      {
+        let alert = new Alert();
+        alert.getType = GetType.List;
+        alert.type = "danger";
+        alert.message = "Sorry, Movie list cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
+        this.alerts.push(alert);
+      }
+      else
+      {
+        this.handlerGeneralErrors(error);
+      }
+      this.isLoading = false;
+    });
+    this.subscriptions.push(subscription);
+  }
+
+  //retrieves the details fo each movie from the server
+  private getMovieDetails(movieInfo: Movie):void
+  {
+    if (this.isQuickLoading == false) //if isQuickLoading is false, retrieves the details of each movie from the server.
+    {
+      this.isLoading=true;
+      let subscription = this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
+        this.updateMovies(d);
+        this.movieCacheService.updateMovieDetails(d); //add to cache.
+        this.isLoading=false;
+      }, error =>
+      {
+        if (error.status = 503)
+        {
+          let alert = new Alert();
+          alert.getType = GetType.Details;
+          alert.movieInfo = movieInfo;
+          alert.type = "danger";
+          alert.message = "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
+          this.alerts.push(alert);
+        }
+        else
+        {
+          this.handlerGeneralErrors(error);
+        }
+        this.isLoading=false;
+      });
+      this.subscriptions.push(subscription);
+    }
+    else  //if isQuickLoading is true, display cards using partial information.
+    {
+      this.updateMovies(movieInfo as MovieDetails);
+      this.movieCacheService.updateMovie(movieInfo); //add to cache
+    }
+  }
+
+  //displays the movie in the UI and registers also to the cache.
+  private updateMovies(movieInfo:MovieDetails)
+  {
+    this.moviesWithDetails.push(movieInfo as MovieDetails); //display to UI
+    this.moviesWithDetails.sort(this.sortingLogic); // perform sorting
+  }
+
+  //handles generic error.
+  private handlerGeneralErrors(error:any):void
+  {
+    let alert = new Alert();
+    alert.type = "danger";
+    alert.message = error.toString();
+    this.alerts.push()
+  }
 }

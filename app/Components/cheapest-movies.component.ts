@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {MovieDetails} from "../Classes/MovieDetails";
 
+//Component that shows movies sorted by cheapest.
 @Component({
   moduleId: module.id,
   selector: 'cheapest-movies',
@@ -11,7 +12,8 @@ export class CheapestMoviesComponent
 {
   sortByCheapest:(a: MovieDetails, b: MovieDetails) =>number;
 
-  ngOnInit(){
+  ngOnInit()
+  {
     this.sortByCheapest = (a: MovieDetails, b: MovieDetails) => {
       if (+a.Price < +b.Price)
         return -1;

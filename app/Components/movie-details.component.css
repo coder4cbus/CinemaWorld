@@ -1,6 +1,4 @@
 img {
-  /*width:300px;*/
-  /*height:458px;*/
   width: 100%;
   max-width: 300px;
   min-width: 100px;
@@ -8,7 +6,6 @@ img {
 
 .btn-primary
 {
-
   float: right;
   background-color: #bd4147;
   color:white;

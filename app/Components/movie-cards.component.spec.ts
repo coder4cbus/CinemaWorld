@@ -1,3 +1,5 @@
+//Unit Test for MovieCardsComponent
+
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MovieDetails} from "../Classes/MovieDetails";
