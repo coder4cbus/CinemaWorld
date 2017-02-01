@@ -14,30 +14,17 @@ import {Subscription} from "rxjs";
 })
 export class MovieDetailsComponent implements OnInit,OnDestroy
 {
-  m: MovieDetails;
+  movieDetails: MovieDetails;
   router:Router;
   alert:Alert;
   id:string;
   isLoading:boolean;
   movieDetailSubsriber: Subscription;
 
-  checkIfHaveNullProperties(): boolean
-  {
-    for (var property in MovieDetails) {
-      if (MovieDetails.hasOwnProperty(property)) {
-        if(!property)
-        {
-          return false;
-        }
-      }
-      return true;
-    }
-  }
-
   constructor(private route: ActivatedRoute,
               private movieService: MovieService,
               private movieCacheService: MoviesCacheService){
-    this.m = new MovieDetails();
+    this.movieDetails = new MovieDetails();
     this.alert = null;
     this.isLoading = false;
   }
@@ -54,7 +41,7 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
       }
       else //if found in the cache, use the one from cache.
       {
-        this.m = cachedMovie;
+        this.movieDetails = cachedMovie;
       }
     });
   }
@@ -78,7 +65,7 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
     this.isLoading = true;
 
     this.movieDetailSubsriber = this.movieService.GetMovieDetails(id).subscribe((response) => {
-        this.m = response;
+        this.movieDetails = response;
         this.isLoading = false;
       }, error => {
         if (error.status = 503) {
@@ -89,7 +76,8 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
           let cachedMovie = this.movieCacheService.getMovie(id);
 
           if(cachedMovie) { //if null means not found in the cache.
-            alert.message = "Sorry, " + cachedMovie.Title + "cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
+            alert.movieInfo = cachedMovie as MovieDetails;
+            alert.message = "Sorry, " + cachedMovie.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
           }
           else
           {

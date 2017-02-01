@@ -2,15 +2,15 @@ import { AppComponent } from './app.component';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
-import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Router} from "@angular/router";
+import {RouterStub} from "../Test/RouteStubs";
 
 describe('AppComponent', function () {
   let comp: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async(() => {
-    var RouterStub;
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
       schemas:      [ NO_ERRORS_SCHEMA ], //to ignore router outlet errors

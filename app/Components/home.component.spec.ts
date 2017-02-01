@@ -1,6 +1,3 @@
-/**
- * Created by jaype on 1/31/2017.
- */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
 import {NO_ERRORS_SCHEMA} from '@angular/core';

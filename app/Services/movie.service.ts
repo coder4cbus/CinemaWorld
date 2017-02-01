@@ -23,32 +23,4 @@ export class MovieService {
       return response.json() as MovieDetails;
     })
   }
-
-
-  // cachedMoviesDetails:Movie[];
-  // GetMovies():Observable<Movie[]>
-  // {
-  //   if (this.cachedMoviesDetails) {
-  //     return Observable.of(this.cachedMoviesDetails);
-  //   } else {
-  //     return this.httpClient.get(urlPrefix + '/movies').map(o=>o.json().Movies as Movie[])
-  //       .do((data) => {
-  //         this.cachedMoviesDetails = data;
-  //       });
-  //   }
-  // }
-
-  // cachedMovieDetails:MovieDetails;
-  // GetMovieDetails(id: string):Observable<MovieDetails>{
-  //
-  //   if (this.cachedMovieDetails) {
-  //     return Observable.of(this.cachedMovieDetails);
-  //   } else {
-  //     return this.httpClient.get(urlPrefix + '/movie/' + id)
-  //       .map(res => res.json() as MovieDetails)
-  //       .do((data) => {
-  //         this.cachedMovieDetails = data;
-  //       });
-  //   }
-  // }
 }

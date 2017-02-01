@@ -5,7 +5,7 @@ import {Alert, GetType} from "../Classes/Alert";
 import {MovieDetails} from "../Classes/MovieDetails";
 import {Movie} from "../Classes/Movie";
 import {MoviesCacheService} from "../Services/movies-cache.service";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 
 @Component({
   moduleId: module.id,
@@ -29,9 +29,6 @@ export class MovieCardsComponent implements OnInit,OnDestroy
 
   @Input()
   sortingLogic:(a: MovieDetails, b: MovieDetails) => number;
-
-  @Output()
-  moviesWithDetailsUpdated = new EventEmitter();
 
   constructor(private movieService: MovieService, router: Router, private movieCacheService:MoviesCacheService){
     this.router = router
@@ -136,7 +133,6 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   {
     this.moviesWithDetails.push(movieInfo as MovieDetails);
     this.moviesWithDetails.sort(this.sortingLogic);
-    this.moviesWithDetailsUpdated.emit(this.moviesWithDetails);
   }
   private handlerGeneralErrors(error:any):void
   {
