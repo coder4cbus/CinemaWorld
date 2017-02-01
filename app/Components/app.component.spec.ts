@@ -22,12 +22,11 @@ describe('AppComponent', function () {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     comp = fixture.componentInstance;
-    //de = fixture.debugElement.query(By.css('h1'));
   });
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have expected CinemaWorld title', () => {
+  it('should have CinemaWorld title', () => {
     let de = fixture.debugElement.query(By.css('.navbar-brand'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
@@ -35,7 +34,7 @@ describe('AppComponent', function () {
       'Show Cinema World Title');
   });
 
-  it('should have expected Home link', () => {
+  it('should have Home link', () => {
     let de = fixture.debugElement.query(By.css('[routerLink="/home"]'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
@@ -43,7 +42,7 @@ describe('AppComponent', function () {
       'Show Home link');
   });
 
-  it('should have expected Chepest link', () => {
+  it('should have expected Cheapest link', () => {
     let de = fixture.debugElement.query(By.css('[routerLink="/cheapest-movies"]'));
     fixture.detectChanges();
     const h1 = de.nativeElement;

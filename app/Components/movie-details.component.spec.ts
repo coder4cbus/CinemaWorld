@@ -51,7 +51,7 @@ describe('MovieDetailsComponent', function () {
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('call ngOnInit, retrieve from server', () => {
+  it('should retrieve movie from server if not in cached during ngOnInit', () => {
 
     var params = {
       'cw0080684':Observable.of( MovieDummyConstants.cw0080684)
@@ -66,7 +66,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('call ngOnInit, retrieve from cache', () => {
+  it('should retrieve movie from cache if found during ngOnInit', () => {
 
     var params = {
       'cw0080684':Observable.of( MovieDummyConstants.cw0080684)
@@ -81,7 +81,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('call ngOnInit, error when retrieving from server. id not found in cache', () => {
+  it('should show generic alert when error when retrieving from server. movie info not in cache', () => {
 
     var params = {
       'cw0080684':Observable.throw(MovieDummyConstants.cw0080684)
@@ -99,7 +99,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('call ngOnInit, error when retrieving from server. id found in cache', () => {
+  it('should show specific alert when error when retrieving from server. movie info is in cache', () => {
 
     var paramsCache = {
       'cw0080684':MovieDummyConstants.cw0080684_partial
@@ -127,7 +127,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('call clickAlert, close alert and retrieve from server', () => {
+  it('should load movies when clickAlert is called', () => {
 
     var params = {
       'cw0080684':Observable.of( MovieDummyConstants.cw0080684)
@@ -150,8 +150,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-
-  it('call closeAlert, close alert if movie error', () => {
+  it('should delete alert when calling closeAlert', () => {
 
     let alert:Alert = new Alert();
     alert.movieInfo = MovieDummyConstants.cw0080684;
@@ -164,7 +163,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('call closeAlert, not error from movie', () => {
+  it('should not delete alert and load movie info if alert is not for movie details', () => {
 
     let alert:Alert = new Alert();
     alert.movieInfo = MovieDummyConstants.cw0080684;

@@ -19,12 +19,11 @@ describe('HomeComponent', function () {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     comp = fixture.componentInstance;
-    //de = fixture.debugElement.query(By.css('h1'));
   });
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have expected Latest Movies Header', () => {
+  it('should have "Latest Movies" Header', () => {
     let de = fixture.debugElement.query(By.css('.component-headers'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
@@ -32,7 +31,7 @@ describe('HomeComponent', function () {
       'Show Latest Movies Header');
   })
 
-  it('should have correct sorting for years released.', () => {
+  it('should sort by year of released.', () => {
     comp.ngOnInit();
     let movieDetails1:MovieDetails = new MovieDetails();
     let movieDetails2:MovieDetails = new MovieDetails();

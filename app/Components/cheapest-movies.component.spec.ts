@@ -22,12 +22,11 @@ describe('CheapestMoviesComponent', function () {
   beforeEach(() => {
     fixture = TestBed.createComponent(CheapestMoviesComponent);
     comp = fixture.componentInstance;
-    //de = fixture.debugElement.query(By.css('h1'));
   });
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have expected Cheapest Movies Header', () => {
+  it('should have "Cheapest Movies" Header', () => {
     let de = fixture.debugElement.query(By.css('.component-headers'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
@@ -35,7 +34,7 @@ describe('CheapestMoviesComponent', function () {
       'Show Cheapest Movies Header');
   })
 
-  it('should have correct sorting for cheapest price.', () => {
+  it('should sort by cheapest price.', () => {
     comp.ngOnInit();
     let movieDetails1:MovieDetails = new MovieDetails();
     let movieDetails2:MovieDetails = new MovieDetails();

@@ -47,7 +47,7 @@ describe('MovieCardsComponent', function () {
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('calling ngOnInit quick mode', () => {
+  it('should load movies during ngOnInit (quick mode)', () => {
 
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
@@ -81,8 +81,7 @@ describe('MovieCardsComponent', function () {
     )
   });
 
-
-  it('calling ngOnInit quick mode with error', () => {
+  it('should show alert when error occurs (quick mode)', () => {
 
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
@@ -95,7 +94,7 @@ describe('MovieCardsComponent', function () {
     expect(comp.alerts[0].message).toEqual("Sorry, Movie list cannot be displayed at this moment. Please click this alert or refresh this page to try again.");
   });
 
-  it('calling ngOnInit full mode', () => {
+  it('should load movies during ngOnInit (full mode)', () => {
 
     //Crate Mock GetMovies
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
@@ -146,7 +145,7 @@ describe('MovieCardsComponent', function () {
     )
   });
 
-  it('calling ngOnInit full mode with error', () => {
+  it('should show alert for each movie when error occurs (full mode)', () => {
 
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
@@ -192,7 +191,7 @@ describe('MovieCardsComponent', function () {
     });
   });
 
-  it('calling clickAlert to retrieve single movie', () => {
+  it('should load the movie when clickAlert(for failed to retrieve movie) is called', () => {
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
 
     let movieCacheService: MoviesCacheService = fixture.debugElement.injector.get(MoviesCacheService);
@@ -227,7 +226,7 @@ describe('MovieCardsComponent', function () {
 
   });
 
-  it('calling clickAlert to retrieve movie list', () => {
+  it('should load all movies when clickAlert(for failed to retrieve movie list) is called', () => {
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
 
     spyOn(movieService, 'GetMovies')
@@ -287,7 +286,7 @@ describe('MovieCardsComponent', function () {
 
   });
 
-  it('calling closeAlert close alert boxes', ()=>{
+  it('should delete the alert when closeAlert is called', ()=>{
     let alert:Alert = new Alert();
     alert.getType = GetType.List;
 
@@ -296,13 +295,13 @@ describe('MovieCardsComponent', function () {
     alert.movieInfo = movieInfo;
     comp.alerts.push(alert);
 
-    comp.clickAlert(alert);
+    comp.closeAlert(alert);
 
     expect(comp.alerts.length).toEqual(0);
 
   });
 
-  it('calling goToDetails navigates to movie-details', inject([Router],(router:Router) =>{
+  it('should navigate to movie details page when goToDetails is called', inject([Router],(router:Router) =>{
     const spy = spyOn(router,'navigate');
     comp.goToDetails("abc");
     const navArgs = spy.calls.first().args[0];
