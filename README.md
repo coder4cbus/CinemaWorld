@@ -1,7 +1,5 @@
 # CinemaWorld Source
 
-Please keep that in mind before posting issues and PRs.
-
 ## Prerequisites
 
 Node.js and npm are essential to Angular development. 
