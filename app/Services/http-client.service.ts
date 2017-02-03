@@ -10,6 +10,6 @@ export class HttpClient {
   get(url: string) {
     return this.http.get(url,  {
     }).share()
-     .retry(0);
+     .retry(3);
   }
 }

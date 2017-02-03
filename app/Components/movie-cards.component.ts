@@ -152,13 +152,4 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     this.moviesWithDetails.push(movieInfo as MovieDetails); //display to UI
     this.moviesWithDetails.sort(this.sortingLogic); // perform sorting
   }
-
-  //handles generic error.
-  private handlerGeneralErrors(error:any):void
-  {
-    let alert = new Alert();
-    alert.type = "danger";
-    alert.message = error.toString();
-    this.alerts.push(alert)
-  }
 }

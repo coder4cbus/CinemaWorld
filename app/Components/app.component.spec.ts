@@ -27,12 +27,12 @@ describe('AppComponent', function () {
 
   it('should create component', () => expect(comp).toBeDefined() );
 
-  it('should have "CinemaWorld" title', () => {
+  it('should have "BestFilms" title', () => {
     let de = fixture.debugElement.query(By.css('.navbar-brand'));
     fixture.detectChanges();
     const h1 = de.nativeElement;
-    expect(h1.innerText).toMatch('CinemaWorld',
-      'Show Cinema World Title');
+    expect(h1.innerText).toMatch('BestFilms',
+      'Show BestFilms Title');
   });
 
   it('should have "Home" link', () => {

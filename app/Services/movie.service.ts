@@ -12,24 +12,14 @@ import {MovieSet} from "../Classes/MovieSet";
 export class MovieService {
   constructor(private httpClient: HttpClient) {
   }
-
   GetMovies(): Observable<MovieSet[]>
   {
-     // return this.httpClient.get(Config.urlPrefix + '/movies').map(
-     //   o=>o.json().Movies as Movie[]
-     // );
     return this.httpClient.get(Config.urlPrefix + '/movies').map(
-      // o=>o.json().Movies as Movie[]
       o=>o.json() as MovieSet[]
     );
 }
 
   GetMovieDetails(id: string, provider: string): Observable<MovieDetails> {
-    // return this.httpClient.get(Config.urlPrefix + '/movie/' + id).map(
-    //   response => {
-    //   return response.json() as MovieDetails;
-    // })
-
     return this.httpClient.get(Config.urlPrefix + '/movies/' + id + "/" + provider).map(
       response => {
       return response.json() as MovieDetails;
