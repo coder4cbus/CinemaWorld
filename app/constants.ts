@@ -1,8 +1,6 @@
 ﻿export class Config
 {
-  //this can be place in a config file.
-  static urlPrefix: string = 'http://webjetapitest.azurewebsites.net/api/cinemaworld';
-  //static urlPrefix: string = 'http://webjetapitest.azurewebsites.net/api/filmworld';
+  static urlPrefix: string = 'http://localhost:36537/api';
   static token: string = 'sjd1HfkjU83ksdsm3802k';
 }
 

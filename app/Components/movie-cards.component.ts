@@ -6,6 +6,7 @@ import {MovieDetails} from "../Classes/MovieDetails";
 import {Movie} from "../Classes/Movie";
 import {MoviesCacheService} from "../Services/movies-cache.service";
 import {Subscription} from "rxjs";
+import {ExceptionHelper} from "../Classes/ExceptionHelper";
 
 //Component that creates card display for movies
 @Component({
@@ -49,9 +50,8 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   }
 
   //navigates to movie detail.
-  goToDetails(id:string):void
-  {
-    this.router.navigate(['/movie-details', id]);
+  goToDetails(id:string, provider:string):void {
+    this.router.navigate(['/movie-details', id, provider]);
   }
 
   //closes the alert box
@@ -99,30 +99,23 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   {
     this.moviesWithDetails = [];
     this.isLoading = true;
-    let subscription = this.movieService.GetMovies().subscribe(movies=>
+    let subscription = this.movieService.GetMovies().subscribe(movieSets=>
     {
-      if(movies)
+      if(movieSets)
       {
-        movies.forEach(movie=>
+        movieSets.forEach(movieSet=>
         {
-          this.getMovieDetails(movie);
+          let movies:Movie[] = JSON.parse(movieSet.Movies).Movies as Movie[];
+          movies.forEach(movie =>{
+            movie.Provider = movieSet.Provider;
+            this.getMovieDetails((movie));
+          })
         })
       }
       this.isLoading = false;
     },error=>
     {
-      if(error.status=503)
-      {
-        let alert = new Alert();
-        alert.getType = GetType.List;
-        alert.type = "danger";
-        alert.message = "Sorry, Movie list cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-        this.alerts.push(alert);
-      }
-      else
-      {
-        this.handlerGeneralErrors(error);
-      }
+      this.alerts.push(ExceptionHelper.CreateAlert(error, null, GetType.List));
       this.isLoading = false;
     });
     this.subscriptions.push(subscription);
@@ -134,25 +127,14 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     if (this.isQuickLoading == false) //if isQuickLoading is false, retrieves the details of each movie from the server.
     {
       this.isLoading=true;
-      let subscription = this.movieService.GetMovieDetails(movieInfo.ID).subscribe(d => {
-        this.updateMovies(d);
-        this.movieCacheService.updateMovieDetails(d); //add to cache.
+      let subscription = this.movieService.GetMovieDetails(movieInfo.ID, movieInfo.Provider).subscribe(movieDetails => {
+        movieDetails.Provider = movieInfo.Provider;
+        this.updateMovies(movieDetails);
+        this.movieCacheService.updateMovieDetails(movieDetails); //add to cache.
         this.isLoading=false;
       }, error =>
       {
-        if (error.status = 503)
-        {
-          let alert = new Alert();
-          alert.getType = GetType.Details;
-          alert.movieInfo = movieInfo;
-          alert.type = "danger";
-          alert.message = "Sorry, " + movieInfo.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-          this.alerts.push(alert);
-        }
-        else
-        {
-          this.handlerGeneralErrors(error);
-        }
+        this.alerts.push(ExceptionHelper.CreateAlert(error, movieInfo as MovieDetails, GetType.Details));
         this.isLoading=false;
       });
       this.subscriptions.push(subscription);
@@ -177,6 +159,6 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     let alert = new Alert();
     alert.type = "danger";
     alert.message = error.toString();
-    this.alerts.push()
+    this.alerts.push(alert)
   }
 }

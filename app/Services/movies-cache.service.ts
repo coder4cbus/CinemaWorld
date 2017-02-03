@@ -51,7 +51,7 @@ export class MoviesCacheService
     this.movieDetailsCache.forEach(movie=>{
       if(movie.ID==id)
       {
-        return movie;
+        cachedMovie =  movie;
       }
     });
 
@@ -62,10 +62,10 @@ export class MoviesCacheService
   {
     let cachedMovie:Movie = null;
 
-    this.movieDetailsCache.forEach(movie=>{
+    this.movieCache.forEach(movie=>{
       if(movie.ID==id)
       {
-        return movie;
+        cachedMovie =  movie;
       }
     });
 

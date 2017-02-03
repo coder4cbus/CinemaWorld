@@ -4,6 +4,7 @@ export class Movie{
   ID: string;
   Type: string;
   Poster: string;
+  Provider:string;
 }
 
 

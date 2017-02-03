@@ -5,6 +5,7 @@ import {MovieDetails} from "../Classes/MovieDetails";
 import {Alert, GetType} from "../Classes/Alert";
 import {MoviesCacheService} from "../Services/movies-cache.service";
 import {Subscription} from "rxjs";
+import {ExceptionHelper} from "../Classes/ExceptionHelper";
 
 //Component to display movie details
 @Component({
@@ -19,7 +20,9 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
   router:Router;
   alert:Alert;
   id:string;
+  provider:string;
   isLoading:boolean;
+  isSuccessGet:boolean;
   movieDetailSubsriber: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -35,16 +38,19 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
   {
     this.route.params.subscribe(params => {
       this.id = params['id'];// get id from route
+      this.provider = params['provider'];// get id from route
 
       let cachedMovie = this.movieCacheService.getMovieDetails(this.id); //check if id is in the movie details cache
 
       if(cachedMovie==null) //if not found in the cache, get from server
       {
-        this.getMovieDetails(this.id);
+        this.getMovieDetails(this.id, this.provider);
       }
       else //if found in the cache, use the one from cache.
       {
+        this.isSuccessGet = false;
         this.movieDetails = cachedMovie;
+        this.isSuccessGet = true;
       }
     });
   }
@@ -62,7 +68,7 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
   {
     if(alert.getType == GetType.Details) //only for alerts with details type
     {
-      this.getMovieDetails(alert.movieInfo.ID);
+      this.getMovieDetails(alert.movieInfo.ID, alert.movieInfo.Provider);
       this.alert=null; //hides the alert
     }
   }
@@ -79,55 +85,36 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
     alert.type = "info";
     alert.message = "Sorry, unable to buy this movie right now. Thi functionality is still under construction."
     this.alert = alert;
-
-  }
-
-  //shows general error
-  private handlerGeneralErrors(error:any):void
-  {
-    let alert = new Alert();
-    alert.type = "danger";
-    alert.message = error.toString();
-    this.alert = alert;
   }
 
   //get movie details from the server
-  private getMovieDetails(id:string):void
+  private getMovieDetails(id:string, provider:string):void
   {
     this.isLoading = true;
-    this.movieDetailSubsriber = this.movieService.GetMovieDetails(id).subscribe((response) => {
+    this.isSuccessGet = false;
+    this.movieDetailSubsriber = this.movieService.GetMovieDetails(id, provider).subscribe((response) => {
         this.movieDetails = response;
+        this.movieDetails.Provider = provider;
         this.isLoading = false;
-      }, error =>
-      {
-        if (error.status = 503)
-        {
-          let alert = new Alert();
-          alert.type = "danger";
-          alert.getType=GetType.Details;
-          let cachedMovie = this.movieCacheService.getMovie(id);
+        this.isSuccessGet = true;
+        this.movieCacheService.updateMovieDetails(response);
+      }, error => {
 
-          if(cachedMovie) //if null means not found in the cache.
-          {
-            //if found in the cache, display a specific message.
-            alert.movieInfo = cachedMovie as MovieDetails;
-            alert.message = "Sorry, " + cachedMovie.Title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-          }
-          else
-          {
-            //if not found in the cache, display a generic message
-            let movie = new MovieDetails();
-            movie.ID = id;
-            alert.movieInfo = movie;
-            alert.message = "Sorry, the selected movie cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-          }
-          this.alert = alert;
-        }
-        else
+        let alert = new Alert();
+        let cachedMovie = this.movieCacheService.getMovie(id);
+        if (cachedMovie) //if null means not found in the cache.
         {
-          this.handlerGeneralErrors(error);
+          alert = (ExceptionHelper.CreateAlert(error, cachedMovie as MovieDetails, GetType.Details));
         }
-
+        else {
+          //if not found in the cache, display a generic message
+          let movie = new MovieDetails();
+          movie.ID = id;
+          movie.Provider = provider;
+          alert.movieInfo = movie;
+          alert = (ExceptionHelper.CreateAlert(error, movie as MovieDetails, GetType.Details));
+        }
+        this.alert = alert;
         this.isLoading = false;
       }
     )

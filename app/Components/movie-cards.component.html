@@ -14,7 +14,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div *ngFor="let m of moviesWithDetails; let i = index" class="carousel-item" [class.active]="i==0" title="{{m.Title}}">
-          <img class="image-slideshow d-block img-fluid" src="{{m.Poster}}" (click)="goToDetails(m.ID)" alt="{{m.Title}} image cannot be loaded">
+          <img (error)="loadImage($event)" class="image-slideshow d-block img-fluid" src="{{m.Poster}}" (click)="goToDetails(m.ID, m.Provider)" alt="{{m.Title}} image cannot be loaded">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -29,14 +29,15 @@
   </div>
   <div *ngFor="let m of moviesWithDetails; let i = index">
     <div class="card movie-box">
-      <img class="card-img-top" src="{{m.Poster}}" alt="{{m.Title}} image cannot be loaded" (click)="goToDetails(m.ID)">
+      <img class="card-img-top" src="{{m.Poster}}" alt="{{m.Title}} image cannot be loaded" (click)="goToDetails(m.ID, m.Provider)">
       <div class="card-block">
         <div class="card-title-div" ngbTooltip="{{m.Title}}">
-          <a class="card-title" href="#/movie-details/{{m.ID}}"  >{{m.Title}}</a>
+          <a class="card-title" href="#/movie-details/{{m.ID}}/{{m.Provider}}"  >{{m.Title}}</a>
         </div>
         <div ngbTooltip="{{m.Rating}}">
           <span *ngFor="let star of +m.Rating | starMaker" id="{{star}}"></span>
         </div>
+        <div class="provider">{{m.Provider}}</div>
         <a *ngIf="m.Price && m.Price!=''" class="card-text price-text" (click)="buyMovie()">$ {{m.Price}} Buy</a>
         <div *ngIf="i==0 && topMarkerText" class="cheapest-triangle"></div>
         <div *ngIf="i==0 && topMarkerText" class="cheapest-text">{{topMarkerText}}</div>

@@ -1,5 +1,3 @@
-//Unit Test for MovieCardsComponent
-
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MovieDetails} from "../Classes/MovieDetails";
@@ -305,7 +303,7 @@ describe('MovieCardsComponent', function () {
 
   it('should navigate to movie details page when goToDetails is called', inject([Router],(router:Router) =>{
     const spy = spyOn(router,'navigate');
-    comp.goToDetails("abc");
+    comp.goToDetails("abc", "provider");
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toContain('/movie-details', 'must navigate to movie-details');
   }));

@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Movie} from "../Classes/Movie";
 import {HttpClient} from "./http-client.service";
 import 'rxjs/add/operator/toPromise';
 import {Observable} from "rxjs";
 import 'rxjs/Rx';
 import {MovieDetails} from "../Classes/MovieDetails";
 import {Config} from "../constants";
+import {MovieSet} from "../Classes/MovieSet";
 
 
 @Injectable()
@@ -13,13 +13,25 @@ export class MovieService {
   constructor(private httpClient: HttpClient) {
   }
 
-  GetMovies(): Observable<Movie[]>
+  GetMovies(): Observable<MovieSet[]>
   {
-    return this.httpClient.get(Config.urlPrefix + '/movies').map(o=>o.json().Movies as Movie[]);
-  }
+     // return this.httpClient.get(Config.urlPrefix + '/movies').map(
+     //   o=>o.json().Movies as Movie[]
+     // );
+    return this.httpClient.get(Config.urlPrefix + '/movies').map(
+      // o=>o.json().Movies as Movie[]
+      o=>o.json() as MovieSet[]
+    );
+}
 
-  GetMovieDetails(id: string): Observable<MovieDetails> {
-    return this.httpClient.get(Config.urlPrefix + '/movie/' + id).map(response => {
+  GetMovieDetails(id: string, provider: string): Observable<MovieDetails> {
+    // return this.httpClient.get(Config.urlPrefix + '/movie/' + id).map(
+    //   response => {
+    //   return response.json() as MovieDetails;
+    // })
+
+    return this.httpClient.get(Config.urlPrefix + '/movies/' + id + "/" + provider).map(
+      response => {
       return response.json() as MovieDetails;
     })
   }
