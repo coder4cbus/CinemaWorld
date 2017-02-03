@@ -1,12 +1,13 @@
 import {Movie} from "../Classes/Movie";
 import {MovieDetails} from "../Classes/MovieDetails";
+import {MovieSet} from "../Classes/MovieSet";
 /**
  * Created by jaype on 2/1/2017.
  */
 
 export class MovieDummyConstants {
-  static  movieList: Movie[] = JSON.parse
-(`[
+
+static movieListString:string = `[
       {
         "Title": "Star Wars: Episode IV - A New Hope",
         "Year": "1977",
@@ -56,7 +57,8 @@ export class MovieDummyConstants {
         "Type": "movie",
         "Poster": "http://ia.media-imdb.com/images/M/MV5BMTY5MjI5NTIwNl5BMl5BanBnXkFtZTYwMTM1Njg2._V1_SX300.jpg"
       }
-    ]`) as Movie[];
+    ]`;
+  static  movieList: Movie[] = JSON.parse(MovieDummyConstants.movieListString) as Movie[];
 
   static cw0080684:MovieDetails = JSON.parse(`{
     "Title": "Star Wars: Episode V - The Empire Strikes Back",

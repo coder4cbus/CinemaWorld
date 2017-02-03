@@ -89,7 +89,7 @@ describe('MovieDetailsComponent', function () {
 
   })
 
-  it('should show generic alert when error when retrieving from server. movie info not in cache', () => {
+   it('should show generic alert when error when retrieving from server. movie info not in cache', () => {
 
     var params = {
       'cw0080684':Observable.throw(MovieDummyConstants.cw0080684)

@@ -20,10 +20,6 @@ export class ExceptionHelper {
       }
       else {
         alert.message = "Sorry, " + title + " cannot be displayed at this moment. Please click this alert or refresh this page to try again.";
-        if (error.status != 503) {
-          //Assumption: for error 500, internal error message is not displayed in the UI because this might scare the user. the error details will be logged instead.
-          log(error.toString());
-        }
       }
     }
     else if (getType == GetType.List) {

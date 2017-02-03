@@ -13,6 +13,7 @@ import {Observable} from "rxjs/Rx";
 import {Alert, GetType} from "../Classes/Alert";
 import {MovieDummyConstants} from "../Test/DummyMovies";
 import {RouterStub} from "../Test/RouteStubs";
+import {MovieSet} from "../Classes/MovieSet";
 
 describe('MovieCardsComponent', function () {
   let comp: MovieCardsComponent;
@@ -49,9 +50,15 @@ describe('MovieCardsComponent', function () {
 
   it('should load movies during ngOnInit (quick mode)', () => {
 
+    let movisets:MovieSet[]  = [];
+    let movie: MovieSet = new MovieSet();
+    movie.Provider = 'cinemaworld';
+    movie.Movies = '{"Movies":' + MovieDummyConstants.movieListString +'}';
+    movisets.push(movie);
+
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
-      .and.returnValues(Observable.of(MovieDummyConstants.movieList));
+      .and.returnValues(Observable.of(movisets));
 
     let movieCacheService: MoviesCacheService = fixture.debugElement.injector.get(MoviesCacheService);
     spyOn(movieCacheService, 'updateMovie');
@@ -96,10 +103,16 @@ describe('MovieCardsComponent', function () {
 
   it('should load movies during ngOnInit (full mode)', () => {
 
+    let movisets:MovieSet[]  = [];
+    let movie: MovieSet = new MovieSet();
+    movie.Provider = 'cinemaworld';
+    movie.Movies = '{"Movies":' + MovieDummyConstants.movieListString +'}';
+    movisets.push(movie);
+
     //Crate Mock GetMovies
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
-      .and.returnValue(Observable.of(MovieDummyConstants.movieList));
+      .and.returnValue(Observable.of(movisets));
 
     //Create Mock GetMovieDetails
     var params = {
@@ -147,9 +160,15 @@ describe('MovieCardsComponent', function () {
 
   it('should show alert for each movie when error occurs (full mode)', () => {
 
+    let movisets:MovieSet[]  = [];
+    let movie: MovieSet = new MovieSet();
+    movie.Provider = 'cinemaworld';
+    movie.Movies = '{"Movies":' + MovieDummyConstants.movieListString +'}';
+    movisets.push(movie);
+
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
     spyOn(movieService, 'GetMovies')
-      .and.returnValue(Observable.of(MovieDummyConstants.movieList));
+      .and.returnValue(Observable.of(movisets));
 
     //Create Mock GetMovieDetails
     var params = {
@@ -227,10 +246,16 @@ describe('MovieCardsComponent', function () {
   });
 
   it('should load all movies when clickAlert(for failed to retrieve movie list) is called', () => {
+    let movisets:MovieSet[]  = [];
+    let movie: MovieSet = new MovieSet();
+    movie.Provider = 'cinemaworld';
+    movie.Movies = '{"Movies":' + MovieDummyConstants.movieListString +'}';
+    movisets.push(movie);
+
     let movieService: MovieService = fixture.debugElement.injector.get(MovieService);
 
     spyOn(movieService, 'GetMovies')
-      .and.returnValue(Observable.of(MovieDummyConstants.movieList));
+      .and.returnValue(Observable.of(movisets));
 
     let movieCacheService: MoviesCacheService = fixture.debugElement.injector.get(MoviesCacheService);
     let updateMovieDetails = spyOn(movieCacheService, 'updateMovieDetails');
