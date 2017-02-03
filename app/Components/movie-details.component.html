@@ -5,7 +5,7 @@
   </div>
 </div>
 <div id="main-row" *ngIf="isSuccessGet==true" class="row">
-  <div id="main-col" class="col-xl-7 offset-xl-2 movie-box">
+  <div id="main-col" class="col-xl-8 offset-xl-2 movie-box">
     <div id="top-row" class="row">
       <div class="col-lg-12 col-xl-5 ">
         <img src="{{movieDetails.Poster}}"/>
@@ -20,12 +20,12 @@
         <div class="row">
           <div class="col">
             <div id="year">{{movieDetails.Year}}</div>
-            <div>{{movieDetails.Released}}<span id="runtime">{{movieDetails.Runtime}}</span></div>
+            <div class="text-nowrap">{{movieDetails.Released}}<span id="runtime">{{movieDetails.Runtime}}</span></div>
             <div class="genre">{{movieDetails.Genre}}</div>
           </div>
           <div class="col">
             <div>{{movieDetails.Rating}}</div>
-            <div>
+            <div class="text-nowrap">
               <span *ngFor="let star of +movieDetails.Rating | starMaker" id="{{star}}"></span>
             </div>
             <div id="votes">{{movieDetails.Votes}} <span id="votes-icon"></span></div>
@@ -98,6 +98,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 
