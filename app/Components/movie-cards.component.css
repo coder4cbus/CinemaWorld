@@ -67,6 +67,9 @@ a
   height: 679px;
   margin-top: -190px;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.64);
+  background-image: url("image-cannot-load.png");
+  background-size: 100% 650px;
 }
 .carousel
 {

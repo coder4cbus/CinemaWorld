@@ -152,4 +152,9 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     this.moviesWithDetails.push(movieInfo as MovieDetails); //display to UI
     this.moviesWithDetails.sort(this.sortingLogic); // perform sorting
   }
+
+  public encodeURIComponent(url:string):string
+  {
+    return encodeURIComponent(url)
+  }
 }

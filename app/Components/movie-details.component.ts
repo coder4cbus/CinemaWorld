@@ -119,4 +119,9 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
       }
     )
   }
+
+  public encodeURIComponent(url:string):string
+  {
+    return encodeURIComponent(url)
+  }
 }
