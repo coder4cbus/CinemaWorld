@@ -83,7 +83,7 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
   {
     let alert = new Alert();
     alert.type = "info";
-    alert.message = "Sorry, unable to buy this movie right now. Thi functionality is still under construction."
+    alert.message = "Sorry, unable to buy this movie right now. This functionality is still under construction."
     this.alert = alert;
   }
 
@@ -123,5 +123,10 @@ export class MovieDetailsComponent implements OnInit,OnDestroy
   public encodeURIComponent(url:string):string
   {
     return encodeURIComponent(url)
+  }
+
+  public GetPosterUrl(url:string):string
+  {
+    return this.movieService.GetMoviePosterUrl(url);
   }
 }

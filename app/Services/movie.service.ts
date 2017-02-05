@@ -25,4 +25,8 @@ export class MovieService {
       return response.json() as MovieDetails;
     })
   }
+
+  GetMoviePosterUrl(id: string): string {
+    return Config.urlPrefix + '/MoviePosters?id=' + encodeURIComponent(id);
+  }
 }

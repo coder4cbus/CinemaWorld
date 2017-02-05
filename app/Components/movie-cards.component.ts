@@ -89,7 +89,7 @@ export class MovieCardsComponent implements OnInit,OnDestroy
   {
     let alert = new Alert();
     alert.type = "info";
-    alert.message = "Sorry, unable to buy this movie right now. Thi functionality is still under construction."
+    alert.message = "Sorry, unable to buy this movie right now. This functionality is still under construction."
     this.alerts.push(alert);
 
   }
@@ -153,8 +153,8 @@ export class MovieCardsComponent implements OnInit,OnDestroy
     this.moviesWithDetails.sort(this.sortingLogic); // perform sorting
   }
 
-  public encodeURIComponent(url:string):string
+  public GetPosterUrl(url:string):string
   {
-    return encodeURIComponent(url)
+    return this.movieService.GetMoviePosterUrl(url);
   }
 }
