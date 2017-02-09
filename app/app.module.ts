@@ -10,6 +10,7 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {StarMakerPipe} from "./Pipes/starMaker.pipe";
 import {MovieCardsComponent} from "./Components/movie-cards.component";
+import {FormsModule} from "@angular/forms";
 enableProdMode();
 
 @NgModule({
@@ -17,7 +18,7 @@ enableProdMode();
     HttpModule,
     JsonpModule,
     AppRoutingModule,
-    NgbModule.forRoot(),],
+    NgbModule.forRoot()],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }], //to prevent error when refreshed.
   declarations: [ AppComponent,
     HomeComponent,
